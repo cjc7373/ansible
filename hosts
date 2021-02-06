@@ -1,0 +1,6 @@
+[lo]
+localhost 
+
+[sin]
+sin.coherence.codes	ansible_user=root
+
