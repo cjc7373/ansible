@@ -1,0 +1,6 @@
+---
+
+- name: start miniflux docker image
+  docker_container:
+    name: miniflux
+    image: miniflux/miniflux:latest

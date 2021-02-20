@@ -1,0 +1,7 @@
+---
+
+- name: install archlinux
+  tasks:
+    - name: check if archlinux is already installed
+      fail: msg="archlinux already installed"
+      when: ansible_distribution == "Archlinux"

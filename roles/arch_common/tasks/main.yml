@@ -1,0 +1,36 @@
+---
+
+- name: set hostname
+  hostname: name="{{ inventory_hostname }}"
+
+- name: configure pacman mirror
+  template: src=mirrorlist.j2 dest=/etc/pacman.d/mirrorlist owner=root group=root mode=0644
+
+- name: update package cache
+  pacman: update_cache=yes
+
+- name: start and enable systemd-timesyncd
+  service: name=systemd-timesyncd enabled=yes state=started
+
+- name: generate locales
+  locale_gen: name={{ item }} state=present
+  with_items:
+    - en_US.UTF-8
+
+- name: configure locales
+  copy: src=locale.conf dest=/etc/locale.conf owner=root group=root mode=0644
+
+# TODO: configure network related work
+# TODO: zram swap if needed
+# TODO: logs
+
+- name: install necessary packages
+  pacman:
+    name: [vim,git,pacman-contrib,docker,python-docker,docker-compose]
+    state: present
+
+- name: enable and start docker
+  service: name=docker enabled=yes state=started
+
+- name: enable paccache timer
+  systemd: name=paccache.timer enabled=yes state=started daemon_reload=yes

@@ -1,0 +1,6 @@
+---
+
+- name: setup beijing tencent
+  host: beijing
+  roles:
+    - { role: arch_common }

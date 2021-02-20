@@ -4,3 +4,8 @@ localhost
 [sin]
 sin.coherence.codes	ansible_user=root
 
+[beijing]
+beijing.coherence.codes ansible_user=root
+
+[la]
+la.coherence.codes ansible_user=root
