@@ -1,0 +1,7 @@
+---
+
+- name: install shadowsocks
+  pacman: name=shadowsocks-libev state=latest
+
+- name: start and enable shadowsocks-server
+  service: name=shadowsocks-libev-server@config.service enabled=yes state=started
