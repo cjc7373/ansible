@@ -1,0 +1,6 @@
+---
+
+- name: setup los_angeles
+  hosts: los_angeles
+  roles:
+    - arch_common

@@ -1,0 +1,4 @@
+---
+
+root_ssh_keys:
+  - coherence.pub

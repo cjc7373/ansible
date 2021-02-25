@@ -38,7 +38,6 @@ get_mirrors() {
 
 cpu_type=$(uname -m)
 
-is_openvz() { [ -d /proc/vz -a ! -d /proc/bc ]; }
 is_lxc() { grep -aqw container=lxc /proc/1/environ ; }
 
 download() {
@@ -93,21 +92,9 @@ configure_chroot() {
 	for m in $mirrors; do
 		echo 'Server = '"$m"'/$repo/os/$arch'
 	done >> "/root.$cpu_type/etc/pacman.d/mirrorlist"
-	# Install and initialize haveged if needed
-	if ! is_openvz && ! pidof haveged >/dev/null; then
-		# Disable signature check, install and launch haveged and re-enable signature checks.
-		sed -i.bak "s/^[[:space:]]*SigLevel[[:space:]]*=.*$/SigLevel = Never/" "/root.$cpu_type/etc/pacman.conf"
-		chroot_exec 'pacman --noconfirm -Sy haveged && haveged'
-		mv "/root.$cpu_type/etc/pacman.conf.bak" "/root.$cpu_type/etc/pacman.conf"
-	fi
 	chroot_exec 'pacman-key --init && pacman-key --populate archlinux'
 	# Generate fstab
 	chroot_exec 'genfstab /mnt >> /etc/fstab'
-
-	if is_openvz && [ "$kernelver" '<' '2.6.32-042stab111.1' ]; then
-		# Use my repository for OpenVZ-patched systemd
-		sed -i 's;^#\[testing\]$;[tredaelli-systemd]\nServer = http://pkgbuild.com/~tredaelli/repo/systemd/$arch\n\n&;' "/root.$cpu_type/etc/pacman.conf"
-	fi
 }
 
 save_root_pass() {
@@ -250,19 +237,6 @@ configure_network() {
 }
 
 finalize() {
-	# OpenVZ hacks
-	if is_openvz; then
-		local kernelver
-		read -r _ _ kernelver _ < /proc/version
-		if [ "$kernelver" '>' '3.10' ]; then
-			# Virtuozzo 7 works with systemd, but it needs /etc/resolvconf/resolv.conf.d directory
-			mkdir -p /etc/resolvconf/resolv.conf.d
-		elif [ "$kernelver" '<' '2.6.32-042stab111.1' ]; then
-			# Use my repository for OpenVZ-patched systemd
-			sed -i 's;^#\[testing\]$;[tredaelli-systemd]\nServer = http://pkgbuild.com/~tredaelli/repo/systemd/$arch\n\n&;' /etc/pacman.conf
-		fi
-	fi
-
 	# Enable SSH login for user root (#3)
 	sed -i '/^#PermitRootLogin\s/s/.*/&\nPermitRootLogin yes/' /etc/ssh/sshd_config
 	
@@ -274,7 +248,7 @@ finalize() {
 		
 	EOF
 	
-	reflector -l 35 -p https --sort rate --save /etc/pacman.d/mirrorlist --connection-timeout 20
+	reflector -l 70 -p https --sort rate --save /etc/pacman.d/mirrorlist --connection-timeout 20
 
 	cat <<-EOF
 		Hi,
@@ -343,10 +317,7 @@ shift $((OPTIND - 1))
 [ -z "$mirrors" ] && mirrors=$(get_mirrors)
 
 
-if is_openvz; then
-	bootloader=none
-	network=netctl
-elif is_lxc; then
+if is_lxc; then
 	bootloader=none
 fi
 

@@ -7,5 +7,5 @@ sin.coherence.codes	ansible_user=root
 [beijing]
 beijing.coherence.codes ansible_user=root
 
-[la]
+[los_angeles]
 la.coherence.codes ansible_user=root
