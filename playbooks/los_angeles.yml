@@ -4,3 +4,4 @@
   hosts: los_angeles
   roles:
     - arch_common
+    - shadowsocks

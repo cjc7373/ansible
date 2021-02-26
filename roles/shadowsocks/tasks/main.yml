@@ -3,5 +3,17 @@
 - name: install shadowsocks
   pacman: name=shadowsocks-libev state=latest
 
+- name: copy kernel config file
+  copy: src=99-sysctl.conf dest=/etc/sysctl.d/ mode=644
+
+- name: apply kernel parameters
+  command: sysctl --system
+
+- name: create shadowsocks config dir
+  file: path=/etc/shadowsocks/ state=directory mode=0755
+
+- name: copy shadowsocks config
+  template: src=config.json.j2 dest=/etc/shadowsocks/config.json
+
 - name: start and enable shadowsocks-server
   service: name=shadowsocks-libev-server@config.service enabled=yes state=started

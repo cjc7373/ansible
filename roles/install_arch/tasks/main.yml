@@ -25,6 +25,8 @@
     playbook_dir: "{{ playbook_dir }}"
   with_items: "{{ root_ssh_keys }}"
 
+# TODO microcode
+
 - name: assign pubkey string to fact
   set_fact: pubkey_string={{ pubkeys.results | map(attribute='ansible_facts.pubkey_list') | join('\n') }}
 

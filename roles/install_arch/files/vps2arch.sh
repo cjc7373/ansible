@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# https://github.com/felixonmars/vps2arch/
+# which is a fork of: https://gitlab.com/drizzt/vps2arch/
+
 # Copyright 2015, Timothy Redaelli <tredaelli@archlinux.info>
 
 # This program is free software: you can redistribute it and/or modify
