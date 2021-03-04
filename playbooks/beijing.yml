@@ -3,4 +3,5 @@
 - name: setup beijing tencent
   hosts: beijing
   roles:
-    - arch_common
+    - { role: arch_common, china_mirror: yes}
+    - frps

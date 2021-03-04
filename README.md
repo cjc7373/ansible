@@ -7,7 +7,9 @@ The file hierarchy and some scripts are from [Archlinux's infrasturcture](https:
 
 ## Vault
 The vault password is saved to KeePass through Freedesktop Secret Service.
+
 Generating password using `head -c 64 /dev/urandom | base64 -w 0`.
+
 Saving password using `keyring set ansible default`.
 
 ## TODO

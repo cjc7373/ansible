@@ -1,0 +1,13 @@
+---
+
+- name: install frps
+  pacman: name=frps state=present
+
+- name: create config directory
+  file: path=/etc/frp/ state=directory mode=0755
+
+- name: copy frps config
+  template: src=frps.ini.j2 dest=/etc/frp/frps.ini mode=0644
+
+- name: start and enable frps
+  service: name=frps.service enabled=yes state=started
