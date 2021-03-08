@@ -5,3 +5,5 @@
   roles:
     - { role: arch_common, china_mirror: yes}
     - frps
+    - { role: caddy, tags: [caddy] }
+    - { role: miniflux, tags: [miniflux] }

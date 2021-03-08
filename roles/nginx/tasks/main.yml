@@ -1,0 +1,5 @@
+---
+# NOTE: deprecated, use caddy instead
+
+- name: install nginx
+  pacman: name=nginx state=presen
