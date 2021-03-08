@@ -1,0 +1,6 @@
+#
+# ~/.bash_profile
+#
+# this file will be executed for login shells, while .bashrc will be executed for interactive non-login shells
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
