@@ -7,3 +7,4 @@
     - frps
     - { role: caddy, tags: [caddy] }
     - { role: miniflux, tags: [miniflux] }
+    - { role: beian, tags: [beian] }

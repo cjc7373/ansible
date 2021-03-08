@@ -56,3 +56,6 @@
 
 - name: enable paccache timer
   systemd: name=paccache.timer enabled=yes state=started daemon_reload=yes
+
+- name: create directory for htmls
+  file: path=/var/www state=directory mode=0755 owner=root group=root
