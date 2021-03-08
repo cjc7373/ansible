@@ -1,0 +1,40 @@
+PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
+
+# append time on PS1
+PS1='[\t]'${PS1}
+
+alias a=alias
+alias cp="cp -i"                          # confirm before overwriting something
+alias free='free -m'                      # show sizes in MB
+alias np='nano -w PKGBUILD'
+alias more=less
+a l='ls'
+a ll='ls -lh'
+a lm='ls -alh'
+a log='last | grep boot | head'
+a his="history | awk '{print \$2}' | sort | uniq -c | sort -k1,1nr | head -20"
+a cpustat="cat /proc/cpuinfo | grep 'MHz'"
+a p="sudo pacman"
+a py="python"
+a grep="grep -E"
+a s="systemctl" # alias won't trigger autocomplition, sad! TODO
+a acv=". .env/bin/activate"
+a rm='trash'  # never use rm!
+a df='df -hT'  # human-readable sizes, filesystem type
+a no='cd /home/cjc/OneDrive/Notes'
+a data='cd /mnt/data/'
+a user='cd /mnt/windows/Users/c/'
+a t='todo.sh -t'  # -t means automatically add current date
+a screenoff='xset dpms force off'
+a phone='adb connect 10.0.0.102 && scrcpy --max-size 1024 --stay-awake --turn-screen-off'
+a mo.fish='echo 摸鱼中...'
+a h="history"
+a dmesg="sudo dmesg --color=always | less -r"
+
+# customize less
+export LESS='-m'
+
+export HISTSIZE=5000
+
+# instruct some programs to use vim
+export EDITOR=vim

@@ -43,7 +43,7 @@
 
 - name: install necessary packages
   pacman:
-    name: [vim,git,pacman-contrib,docker,python-docker,docker-compose]
+    name: [vim,git,pacman-contrib,docker,python-docker,docker-compose, bash-completion]
     state: present
 
 - name: install some tools
@@ -59,3 +59,9 @@
 
 - name: create directory for htmls
   file: path=/var/www state=directory mode=0755 owner=root group=root
+
+- name: install root shell config
+  copy: src={{ item }} dest=/root/.{{ item }} mode=0644
+  with_items:
+    - bashrc
+    - bash_profile

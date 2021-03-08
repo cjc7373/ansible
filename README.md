@@ -13,4 +13,4 @@ Generating password using `head -c 64 /dev/urandom | base64 -w 0`.
 Saving password using `keyring set ansible default`.
 
 ## TODO
-- 把 install 写成一个 role 是否合理?
+- backup (maybe borg?)
