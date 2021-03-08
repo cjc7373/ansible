@@ -1,3 +1,7 @@
 rss.coherence.space {
     reverse_proxy 127.0.0.1:9001
+    log {
+	    output file /var/log/caddy/miniflux_access.log
+        format console
+    }
 }
