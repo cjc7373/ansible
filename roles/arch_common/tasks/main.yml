@@ -22,10 +22,9 @@
   pacman:
     name: archlinuxcn-keyring
     state: present
-  notify: update package cache
 
-- name: Flush handlers
-  meta: flush_handlers
+- name: update package cache
+  pacman: update_cache=yes
 
 - name: start and enable systemd-timesyncd
   service: name=systemd-timesyncd enabled=yes state=started
@@ -45,6 +44,11 @@
 - name: install necessary packages
   pacman:
     name: [vim,git,pacman-contrib,docker,python-docker,docker-compose]
+    state: present
+
+- name: install some tools
+  pacman:
+    name: [htop, besttrace]
     state: present
 
 - name: enable and start docker

@@ -1,0 +1,14 @@
+---
+
+- name: install caddy
+  pacman: name=caddy state=present
+
+- name: create config directory
+  file: path=/etc/caddy/conf.d state=directory mode=0755
+
+- name: copy caddy config
+  template: src=Caddyfile.j2 dest=/etc/caddy/Caddyfile mode=0644
+  notify: reload caddy
+
+- name: start and enable caddy
+  service: name=caddy.service enabled=yes state=started

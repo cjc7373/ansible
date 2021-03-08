@@ -1,6 +1,14 @@
 ---
 
-- name: start miniflux docker image
-  docker_container:
-    name: miniflux
-    image: miniflux/miniflux:latest
+- name: create data directory
+  file: path=/root/miniflux state=directory mode=0755
+
+- name: copy miniflux docker-compose.yml
+  template: src=docker-compose.yml.j2 dest=/root/miniflux/docker-compose.yml mode=0644
+
+- name: create and start service
+  docker_compose: project_src=/root/miniflux
+
+- name: add caddy config
+  template: src=miniflux.caddy.j2 dest=/etc/caddy/conf.d/miniflux.caddy mode=0644
+  notify: reload caddy
