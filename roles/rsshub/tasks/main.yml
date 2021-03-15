@@ -1,0 +1,14 @@
+---
+
+- name: create data directory
+  file: path=/root/rsshub state=directory mode=0755
+
+- name: copy rsshub docker-compose.yml
+  template: src=docker-compose.yml.j2 dest=/root/rsshub/docker-compose.yml mode=0644
+
+- name: create and start service
+  docker_compose: project_src=/root/rsshub
+
+- name: add caddy config
+  template: src=rsshub.caddy.j2 dest=/etc/caddy/conf.d/rsshub.caddy mode=0644
+  notify: reload caddy

@@ -1,0 +1,7 @@
+rsshub.coherence.space {
+    reverse_proxy 127.0.0.1:1200
+    log {
+	    output file /var/log/caddy/rsshub_access.log
+        format console
+    }
+}
