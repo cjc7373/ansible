@@ -48,7 +48,7 @@
 
 - name: install some tools
   pacman:
-    name: [htop, besttrace]
+    name: [htop, besttrace, neofetch]
     state: present
 
 - name: enable and start docker
