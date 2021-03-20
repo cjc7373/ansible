@@ -1,0 +1,4 @@
+---
+
+project_path: /root/dpb
+venv_path: "{{ project_path }}/.env"

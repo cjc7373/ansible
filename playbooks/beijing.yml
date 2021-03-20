@@ -9,3 +9,4 @@
     - { role: miniflux, tags: [miniflux] }
     - { role: beian, tags: [beian] }
     - rsshub
+    - { role: dpb, tags: [dpb] }

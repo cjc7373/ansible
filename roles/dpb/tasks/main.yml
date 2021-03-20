@@ -1,0 +1,41 @@
+---
+
+- name: clone or pull git repo
+  git:
+    repo: https://github.com/cjc7373/dpb.git
+    dest: "{{ project_path }}"
+    update: yes
+    # TODO: notify reload if updated
+  when: false
+  # FIXME: Github is almost unusable in China..
+
+- name: install requirements to .env
+  pip:
+    requirements: "{{ project_path }}/requirements.txt"
+    virtualenv: "{{ venv_path }}"
+
+- name: create data directory
+  file: path="{{ project_path }}/data" state=directory mode=0755 owner=root group=root
+
+- name: create database
+  django_manage:
+    command: migrate
+    project_path: "{{ project_path }}"
+    virtualenv: "{{ venv_path }}"
+
+# TODO: create superuser
+
+- name: install gunicorn
+  pip:
+    virtualenv: "{{ venv_path }}"
+    name: gunicorn
+
+- name: copy gunicorn systemd service
+  template: src=dpb.gunicorn.service.j2 dest=/etc/systemd/system/dpb.gunicorn.service owner=root group=root mode=0644
+
+- name: enable and start gunicorn service
+  service: name=dpb.gunicorn enabled=yes state=started
+
+- name: add caddy config
+  template: src=dpb.caddy.j2 dest=/etc/caddy/conf.d/dpb.caddy mode=0644
+  notify: reload caddy

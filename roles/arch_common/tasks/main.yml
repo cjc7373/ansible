@@ -7,6 +7,7 @@
   template: src=mirrorlist.j2 dest=/etc/pacman.d/mirrorlist owner=root group=root mode=0644
   when: china_mirror
 
+# TODO: pacman config Color and Verbose
 - name: add archlinuxcn repo
   blockinfile:
     path: /etc/pacman.conf
@@ -43,7 +44,7 @@
 
 - name: install necessary packages
   pacman:
-    name: [vim,git,pacman-contrib,docker,python-docker,docker-compose, bash-completion]
+    name: [vim,git,pacman-contrib,docker,python-docker,docker-compose, bash-completion, python-virtualenv]
     state: present
 
 - name: install some tools
@@ -65,3 +66,7 @@
   with_items:
     - bashrc
     - bash_profile
+
+- name: install pip conf
+  template: src=pip.conf.j2 dest=/etc/pip.conf owner=root group=root mode=0644
+  when: china_mirror

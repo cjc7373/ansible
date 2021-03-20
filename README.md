@@ -16,4 +16,7 @@ Saving password using `keyring set ansible default` (which is provided by python
 - backup (maybe borg?)
 - should I do a system upgrade everytime when I execute a playbook?
 - make use of the until loop.. The `pacman -Sy` seems to be flaky
+- use `debug` mode to print messages during execution
 
+## Notes
+- Idempotence is IMPORTANT! Think about it when adding a task.
