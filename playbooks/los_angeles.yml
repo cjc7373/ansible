@@ -5,3 +5,5 @@
   roles:
     - arch_common
     - shadowsocks
+    - caddy
+    - some_reverse_proxies

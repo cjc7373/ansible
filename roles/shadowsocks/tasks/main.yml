@@ -5,10 +5,12 @@
 
 - name: copy kernel config file
   copy: src=99-sysctl.conf dest=/etc/sysctl.d/ mode=644
+  register: copy_config_res
 
 # as per: https://shadowsocks.org/en/config/advanced.html
 - name: apply kernel parameters
   command: sysctl --system
+  when: copy_config_res.changed
 
 - name: create shadowsocks config dir
   file: path=/etc/shadowsocks/ state=directory mode=0755

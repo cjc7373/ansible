@@ -1,0 +1,7 @@
+telegram.coherence.codes {
+    reverse_proxy https://api.telegram.org
+    log {
+	    output file /var/log/caddy/telegram_access.log
+        format console
+    }
+}
