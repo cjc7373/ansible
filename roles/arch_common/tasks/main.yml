@@ -30,6 +30,10 @@
 - name: start and enable systemd-timesyncd
   service: name=systemd-timesyncd enabled=yes state=started
 
+- name: set timezone to China Standard Time
+  community.general.timezone:
+    name: Asia/Shanghai
+
 - name: generate locales
   locale_gen: name={{ item }} state=present
   with_items:
@@ -49,7 +53,7 @@
 
 - name: install some tools
   pacman:
-    name: [htop, besttrace, neofetch]
+    name: [htop, besttrace, neofetch, trash-cli]
     state: present
 
 - name: enable and start docker
