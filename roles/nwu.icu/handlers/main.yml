@@ -1,0 +1,8 @@
+---
+
+- name: reload gunicorn
+  service: name=nwu.icu.gunicorn state=reloaded
+
+- name: daemon reload
+  systemd:
+    daemon-reload: true

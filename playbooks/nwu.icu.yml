@@ -1,0 +1,8 @@
+---
+
+- name: setup nwu.icu
+  hosts: moo
+  roles:
+    - arch_common
+    - caddy
+    - { role: nwu.icu, tags: [nwu.icu] }

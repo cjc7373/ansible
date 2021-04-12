@@ -1,0 +1,77 @@
+---
+
+- name: clone or pull git repo
+  git:
+    repo: https://github.com/NWUCA/NWU.ICU
+    dest: "{{ project_path }}"
+    update: yes
+  notify: reload gunicorn
+  # FIXME: Ideally if the repo is not changed, the following tasks should all be skipped.
+  # But if so, we lost the ability to retry when one following task fails... 
+
+- name: install cronie
+  pacman:
+    name: cronie
+    state: present
+
+- name: start cronie service
+  service: name=cronie enabled=yes state=started
+  
+- name: install pipenv
+  pacman:
+    name: python-pipenv
+    state: present
+
+- name: install dependencies
+  command: pipenv sync -v
+  args:
+    chdir: "{{ project_path }}"
+  environment:
+    PIPENV_VENV_IN_PROJECT: 1
+  register: result
+  changed_when: "'Successfully installed' in result"
+
+- name: install gunicorn
+  pip:
+    virtualenv: "{{ venv_path }}"
+    name: gunicorn
+    state: latest
+
+- name: create/update database table
+  django_manage:
+    command: migrate
+    project_path: "{{ project_path }}"
+    virtualenv: "{{ venv_path }}"
+    settings: settings.production
+
+- name: create static file directory
+  file: path=/var/www/nwu.icu/ state=directory mode=0755 owner=caddy group=caddy
+
+- name: collect static files
+  django_manage:
+    command: collectstatic
+    project_path: "{{ project_path }}"
+    virtualenv: "{{ venv_path }}"
+    settings: settings.production
+
+# FIXME: The gunicorn service file is a duplicate of dpb's and does not meet the DRY discipline. Should be abstracted to a role. 
+- name: copy gunicorn systemd service
+  template: src=nwu.icu.gunicorn.service.j2 dest=/etc/systemd/system/nwu.icu.gunicorn.service owner=root group=root mode=0644
+  notify: daemon reload
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: enable and start gunicorn service
+  service: name=nwu.icu.gunicorn enabled=yes state=started
+
+- name: add caddy config
+  template: src=nwu.icu.caddy.j2 dest=/etc/caddy/conf.d/nwu.icu.caddy mode=0644
+  notify: reload caddy
+
+- name: add daily autoreport crontab
+  ansible.builtin.cron:
+    name: autoreport
+    minute: "5"
+    hour: "0,6,12"
+    job: "{{ project_path }}/trigger_report.sh > /root/autoreport.log 2>&1"

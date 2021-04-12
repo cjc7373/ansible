@@ -9,3 +9,6 @@ beijing.coherence.codes ansible_user=root
 
 [los_angeles]
 la.coherence.codes ansible_user=root
+
+[moo]
+nwu.icu ansible_user=root

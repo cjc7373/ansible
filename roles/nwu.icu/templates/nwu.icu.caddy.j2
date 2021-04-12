@@ -1,0 +1,18 @@
+nwu.icu {
+    encode zstd gzip
+    handle /static/* {
+        file_server { 
+            root /var/www/nwu.icu
+            browse
+        }
+    }
+    reverse_proxy * 127.0.0.1:12315
+    log {
+        format console
+        output stdout
+    }
+}
+
+course.nwu.icu {
+    redir https://nwu.icu{uri} permanent
+}

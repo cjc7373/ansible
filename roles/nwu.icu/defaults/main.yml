@@ -1,0 +1,4 @@
+---
+
+project_path: /root/nwu.icu
+venv_path: "{{ project_path }}/.venv"
