@@ -46,9 +46,10 @@
 # TODO: zram swap if needed
 # TODO: logs
 
+# The `which` package is necessary for pipenv to find proper python interpreter
 - name: install necessary packages
   pacman:
-    name: [vim,git,pacman-contrib,docker,python-docker,docker-compose, bash-completion, python-virtualenv]
+    name: [vim,git,pacman-contrib,docker,python-docker,docker-compose, bash-completion, python-virtualenv, which]
     state: present
 
 - name: install some tools

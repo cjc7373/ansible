@@ -74,4 +74,4 @@
     name: autoreport
     minute: "5"
     hour: "0,6,12"
-    job: "{{ project_path }}/trigger_report.sh > /root/autoreport.log 2>&1"
+    job: "{{ project_path }}/report/trigger_report.sh > /root/autoreport.log 2>&1"

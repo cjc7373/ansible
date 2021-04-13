@@ -35,7 +35,6 @@ Saving password using `keyring set ansible default` (which is provided by python
 - use `debug` mode to print messages during execution
 - Could cloudflare be automated? - Sure it can! Use `community.general.cloudflare_dns`.
 - how to manage syncthing?
-- Timezone
 
 ## Backup
 There should be at least two backup servers, for the basic redundancy.

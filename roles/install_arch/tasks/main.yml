@@ -16,6 +16,11 @@
 # TODO: this script shell be divided into multiple tasks
 - name: execute vps2arch script
   command: /tmp/vps2arch.sh
+  register: result
+
+- name: print result
+  debug:
+    var: result
 
 # pubkey operations are copyed from archlinux infrastructure
 - name: assign pubkey list to fact
