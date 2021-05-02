@@ -208,11 +208,18 @@ configure_network() {
 	set -- $(ip addr show dev "$dev" | awk '($1 == "inet") { print $2 }')
 	ip=$@
 
+	# set the mtu
+	set -- $(ip addr show dev "$dev" | awk '($4 == "mtu") { print $5 }')
+	mtu=$@
+
 	# FIXME Not supported for "P2P" interfaces, such as venet, yet
 	if [ "$network" = "systemd-networkd" ]; then
 		cat > /etc/systemd/network/default.network <<-EOF
 			[Match]
 			Name=$dev
+
+			[Link]
+			MTUBytes=$mtu
 
 			[Network]
 			Gateway=$gateway

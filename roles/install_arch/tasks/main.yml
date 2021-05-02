@@ -42,4 +42,4 @@
   shell: head -c 32 /dev/urandom | base64 | sed 's/^/root:/' | chpasswd
 
 - name: reboot
-  reboot:
+  raw: sync; reboot -f

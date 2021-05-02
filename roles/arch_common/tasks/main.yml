@@ -1,7 +1,15 @@
 ---
 
+# - name: Print all available facts
+#   ansible.builtin.debug:
+#     var: ansible_facts
+
 - name: set hostname
-  hostname: name="{{ inventory_hostname }}"
+  hostname: 
+    name: "{{ inventory_hostname }}"
+  # FIXME: this module will fail after I updated ansible to some version...
+  # Maybe it's archlinux's packaging bug..
+  ignore_errors: yes
 
 - name: configure pacman mirror
   template: src=mirrorlist.j2 dest=/etc/pacman.d/mirrorlist owner=root group=root mode=0644
@@ -54,7 +62,7 @@
 
 - name: install some tools
   pacman:
-    name: [htop, besttrace, neofetch, trash-cli]
+    name: [htop, besttrace, neofetch, trash-cli, strace]
     state: present
 
 - name: enable and start docker

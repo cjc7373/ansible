@@ -31,11 +31,17 @@
   register: result
   changed_when: "'Successfully installed' in result"
 
+- name: print pipenv result
+  debug: var=result
+
 - name: install gunicorn
   pip:
     virtualenv: "{{ venv_path }}"
     name: gunicorn
     state: latest
+
+- name: backup database before migration
+  copy: "src={{ project_path }}/db.sqlite3 dest={{ project_path }}/db.sqlite3.backup backup=yes remote_src=yes"
 
 - name: create/update database table
   django_manage:
