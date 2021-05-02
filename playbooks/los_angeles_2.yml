@@ -1,0 +1,8 @@
+---
+
+- name: setup la2
+  hosts: la2
+  roles:
+    - arch_common
+    - shadowsocks
+    - caddy
