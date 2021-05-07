@@ -1,0 +1,25 @@
+---
+
+# TODO: insert ssh private key
+
+- name: create project path
+  file: path={{ project_path }} state=directory mode=0755 owner=root group=root
+
+- name: clone repo
+  command: git clone --mirror {{ SOURCE_URL }} {{ project_path }}/{{ NAME }}
+  args:
+    creates: "{{ project_path }}/{{ NAME }}"
+
+- name: install sync script
+  template: src=sync_mirror.sh.j2 dest={{ project_path }}/sync_mirror.sh mode=0755
+
+- name: install mirror service and timer
+  template: src="{{ item }}.j2" dest="/etc/systemd/system/{{ NAME }}-{{ item }}" owner=root group=root mode=0644
+  with_items:
+    - mirror.service
+    - mirror.timer
+  notify:
+    - daemon reload
+
+- name: start and enable mirror timer
+  service: name="{{ NAME }}-mirror.timer" enabled=yes state=started

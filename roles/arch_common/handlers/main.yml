@@ -1,2 +1,8 @@
+---
+
 - name: update package cache
   pacman: update_cache=yes
+
+- name: daemon reload
+  systemd:
+    daemon-reload: true

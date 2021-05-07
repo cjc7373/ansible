@@ -1,0 +1,7 @@
+[Unit]
+Description=Mirror {{ NAME }} repo
+
+[Service]
+Type=oneshot
+# Note the shell script must have shebang
+ExecStart={{ project_path }}/sync_mirror.sh

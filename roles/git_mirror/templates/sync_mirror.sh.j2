@@ -1,0 +1,4 @@
+#!/bin/sh
+cd {{ project_path }}/{{ NAME }}
+git remote update
+git push --mirror {{ MIRROR_URL }}

@@ -1,0 +1,12 @@
+[Unit]
+Description=Mirror {{ NAME }} repo timer
+
+[Timer]
+OnCalendar=daily
+# prolong accuracy window to save power
+AccuracySec=1h
+# trigger the task if missed
+Persistent=true
+
+[Install]
+WantedBy=timers.target
