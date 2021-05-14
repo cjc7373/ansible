@@ -5,7 +5,7 @@ The file hierarchy and some scripts are from [Archlinux's infrasturcture](https:
 ## Standard Procedure For A New Machine
 - If the login user is not root, make sure we can login with root.
 - Add this machine to inventory list, which is `./hosts`.
-- Run `ansible-playbook playbooks/install-arch.yml -l host_name -v --ask-pass`
+- Run `ansible-playbook playbooks/install_arch.yml -l host_name -v --ask-pass`
 - Input the root password.
 - Double confirm installation when playbook is paused.
 
@@ -13,6 +13,8 @@ The playbook will have a warning:
 `[WARNING]: sftp transfer mechanism failed on [test.nwu.icu]. Use ANSIBLE_DEBUG=1 to see detailed information`
 
 But it seems this did not affect anything. To be investigated..
+
+The playbook will also get stuck on the final step, use Ctrl+C to exit.
 
 ## Vault
 The vault password is saved to KeePass through Freedesktop Secret Service.
@@ -25,6 +27,7 @@ Saving password using `keyring set ansible default` (which is provided by python
 - View: `ansible-vault view foo.yml`
 - Edit: `ansible-vault edit foo.yml`
 - View an encrypted variable: `ansible localhost -m debug -a var="new_user_password" -e "@foo.yml"` (`@` is necessary)
+- Create: `ansible-vault create foo.yml`
 
 ## TODO
 - backup (maybe borg?)

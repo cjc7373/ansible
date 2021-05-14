@@ -38,8 +38,12 @@
 - name: add authorized key for root
   authorized_key: user=root key="{{ pubkey_string }}" path=/root/.ssh/authorized_keys exclusive=yes
 
-- name: change root password to a random string
-  shell: head -c 32 /dev/urandom | base64 | sed 's/^/root:/' | chpasswd
+# random password can be tricky if we want to login via VNC
+# so it's better have a fixed password
+# - name: change root password to a random string
+#   shell: head -c 32 /dev/urandom | base64 | sed 's/^/root:/' | chpasswd
+- name: change root password
+  shell: echo "root:{{ password }}" | chpasswd
 
 - name: reboot
   raw: sync; reboot -f
