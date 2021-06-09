@@ -1,0 +1,18 @@
+---
+
+- name: create fava directory
+  file: path={{ item }} state=directory mode=0755
+  loop:
+    - /root/fava
+
+- name: copy fava configs
+  template: src={{ item }}.j2 dest=/root/fava/{{ item }} mode=0644
+  loop:
+    - docker-compose.yml
+
+- name: create and start service
+  docker_compose: project_src=/root/fava
+
+- name: add caddy config
+  template: src=fava.caddy.j2 dest=/etc/caddy/conf.d/fava.caddy mode=0644
+  notify: reload caddy

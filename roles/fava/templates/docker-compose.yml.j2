@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+    fava:
+        image: yegle/fava
+        container_name: fava
+        restart: always
+        volumes:
+            - {{ beancount_dir }}:/bean
+        environment:
+            - BEANCOUNT_FILE=/bean/main.bean
+        ports:
+            - 127.0.0.1:6674:5000

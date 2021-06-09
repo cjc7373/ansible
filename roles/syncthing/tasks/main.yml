@@ -1,0 +1,24 @@
+---
+
+# FIXME: fix the permission issues
+- name: create syncthing directory
+  file: path={{ item }} state=directory mode=0777
+  loop:
+    - /root/syncthing
+    - /root/syncthing/config
+
+- name: copy syncthing configs
+  template: src={{ item }}.j2 dest=/root/syncthing/{{ item }} mode=0666
+  loop:
+    - docker-compose.yml
+    - config/config.xml
+
+- name: copy private and public keys
+  copy: src={{ item }} dest=/root/syncthing/{{ item }} mode=0644
+  loop:
+    - config/cert.pem
+    - config/key.pem
+
+- name: create and start service
+  docker_compose: project_src=/root/syncthing
+

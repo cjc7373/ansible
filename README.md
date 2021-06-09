@@ -24,10 +24,9 @@ Generating password using `head -c 64 /dev/urandom | base64 -w 0`.
 Saving password using `keyring set ansible default` (which is provided by python-keyring libaray).
 
 ### Some operations
-- View: `ansible-vault view foo.yml`
-- Edit: `ansible-vault edit foo.yml`
+- View/Edit/Create an encrypted file: `ansible-vault view/edit/create foo.yml`
+- Encrypt/decrypt an existing file: `ansible-vault encrypt/decrypt foo.yml`
 - View an encrypted variable: `ansible localhost -m debug -a var="new_user_password" -e "@foo.yml"` (`@` is necessary)
-- Create: `ansible-vault create foo.yml`
 
 ## TODO
 - backup (maybe borg?)
@@ -55,3 +54,8 @@ I'm wondering if the restore procedure can be automated, or at least documented.
 
 ## Gunicorn
 `community.general.gunicorn` doesn't seem to support reload. So I choose to stick on the systemd service.
+
+## Services not controlled with ansible
+- los_angeles:
+    - go-cqhttp
+    - forward-bot

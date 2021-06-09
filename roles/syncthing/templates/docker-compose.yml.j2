@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  syncthing:
+    image: syncthing/syncthing:latest
+    container_name: syncthing
+    restart: always
+    volumes:
+      - ./:/var/syncthing
+    environment:
+      - STGUIADDRESS=
+    network_mode: "host"

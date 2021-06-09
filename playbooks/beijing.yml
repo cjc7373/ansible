@@ -10,3 +10,5 @@
     - { role: beian, tags: [beian] }
     - rsshub
     - { role: dpb, tags: [dpb] }
+    - { role: syncthing, tags: [syncthing] }
+    - { role: fava, tags: [fava] }
