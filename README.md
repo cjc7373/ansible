@@ -59,3 +59,7 @@ I'm wondering if the restore procedure can be automated, or at least documented.
 - los_angeles:
     - go-cqhttp
     - forward-bot
+- shanghai_aliyun: (This server is not maintained by ansible and is deprecated)
+    - nwuoj
+    - as soon as nwuoj is migrated to other servers, this server will be stopped
+
