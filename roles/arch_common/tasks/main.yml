@@ -89,5 +89,10 @@
   notify:
     - restart sshd
 
-- name: enable and start fail2ban with default config
+- name: enable and start fail2ban
   service: name=fail2ban enabled=yes state=started
+
+- name: copy fail2ban config
+  template: src=jail.local.j2 dest=/etc/fail2ban/jail.local owner=root group=root mode=0644
+  notify:
+    - restart fail2ban

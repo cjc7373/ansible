@@ -35,6 +35,7 @@ Saving password using `keyring set ansible default` (which is provided by python
 - use `debug` mode to print messages during execution
 - Could cloudflare be automated? - Sure it can! Use `community.general.cloudflare_dns`.
 - For now, the configs management is divided to two parts, my own pc and my VPS. However, I believe they can be merged into one..
+- Find some motd scripts, like: https://github.com/yboetz/motd/blob/master/50-fail2ban-status
 
 ## Some specific Apps
 ### Syncthing
