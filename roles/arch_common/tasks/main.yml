@@ -57,7 +57,7 @@
 # The `which` package is necessary for pipenv to find proper python interpreter
 - name: install necessary packages
   pacman:
-    name: [vim,git,pacman-contrib,docker,python-docker,docker-compose, bash-completion, python-virtualenv, which]
+    name: [vim,git,pacman-contrib,docker,python-docker,docker-compose, bash-completion, python-virtualenv, which, fail2ban]
     state: present
 
 - name: install some tools
@@ -83,3 +83,11 @@
 - name: install pip conf
   template: src=pip.conf.j2 dest=/etc/pip.conf owner=root group=root mode=0644
   when: china_mirror
+
+- name: configure sshd
+  template: src=sshd_config.j2 dest=/etc/ssh/sshd_config owner=root group=root mode=0644 validate='/usr/sbin/sshd -t -f %s'
+  notify:
+    - restart sshd
+
+- name: enable and start fail2ban with default config
+  service: name=fail2ban enabled=yes state=started

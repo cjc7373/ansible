@@ -6,3 +6,6 @@
 - name: daemon reload
   systemd:
     daemon-reload: true
+
+- name: restart sshd
+  service: name=sshd state=restarted
