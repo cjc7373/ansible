@@ -5,9 +5,13 @@
     repo: https://github.com/cjc7373/dpb.git
     dest: "{{ project_path }}"
     update: yes
-    # TODO: notify reload if updated
-  when: false
-  # FIXME: Github is almost unusable in China..
+  notify:
+    reload gunicorn
+  # Github operations are very likely to fail in China..
+  retries: 5
+  delay: 3
+  register: result
+  until: result is success
 
 - name: install requirements to .env
   pip:
