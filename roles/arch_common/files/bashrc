@@ -36,7 +36,10 @@ a h="history"
 a dmesg="sudo dmesg --color=always | less -r"
 
 # customize less
-export LESS='-m'
+# -m --long-prompt
+# -F --quit-if-one-screen
+# -R --RAW-CONTROL-CHARS
+export LESS='-mFR'
 
 export HISTSIZE=5000
 
