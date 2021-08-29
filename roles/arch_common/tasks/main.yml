@@ -1,11 +1,10 @@
 ---
-
 # - name: Print all available facts
 #   ansible.builtin.debug:
 #     var: ansible_facts
 
 - name: set hostname
-  hostname: 
+  hostname:
     name: "{{ inventory_hostname }}"
   # FIXME: A bug of ansible
   # See: https://github.com/ansible/ansible/issues/74556
@@ -57,12 +56,34 @@
 # The `which` package is necessary for pipenv to find proper python interpreter
 - name: install necessary packages
   pacman:
-    name: [vim,git,pacman-contrib,docker,python-docker,docker-compose, bash-completion, python-virtualenv, which, fail2ban]
+    name:
+      [
+        vim,
+        git,
+        pacman-contrib,
+        docker,
+        python-docker,
+        docker-compose,
+        bash-completion,
+        python-virtualenv,
+        which,
+        fail2ban,
+      ]
     state: present
 
 - name: install some tools
   pacman:
-    name: [htop, besttrace, neofetch, trash-cli, strace, bind]
+    name:
+      [
+        htop,
+        besttrace,
+        neofetch,
+        trash-cli,
+        strace,
+        bind,
+        rsync,
+        speedtest-cli,
+      ]
     state: present
 
 - name: enable and start docker

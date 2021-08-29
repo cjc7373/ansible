@@ -1,14 +1,13 @@
 ---
-
 - name: clone or pull git repo
   git:
     repo: https://github.com/NWUCA/NWU.ICU
     dest: "{{ project_path }}"
     update: yes
   notify: reload gunicorn
-  # FIXME: Ideally if the repo is not changed, the following tasks should all be skipped.
-  # But if so, we lost the ability to retry when one following task fails... 
 
+  # FIXME: Ideally if the repo is not changed, the following tasks should all be skipped.
+  # But if so, we lost the ability to retry when one following task fails...
 - name: install cronie
   pacman:
     name: cronie
@@ -16,7 +15,7 @@
 
 - name: start cronie service
   service: name=cronie enabled=yes state=started
-  
+
 - name: install pipenv
   pacman:
     name: python-pipenv
@@ -60,7 +59,7 @@
     virtualenv: "{{ venv_path }}"
     settings: settings.production
 
-# FIXME: The gunicorn service file is a duplicate of dpb's and does not meet the DRY discipline. Should be abstracted to a role. 
+# FIXME: The gunicorn service file is a duplicate of dpb's and does not meet the DRY discipline. Should be abstracted to a role.
 - name: copy gunicorn systemd service
   template: src=nwu.icu.gunicorn.service.j2 dest=/etc/systemd/system/nwu.icu.gunicorn.service owner=root group=root mode=0644
   notify: daemon reload
@@ -74,10 +73,10 @@
 - name: add caddy config
   template: src=nwu.icu.caddy.j2 dest=/etc/caddy/conf.d/nwu.icu.caddy mode=0644
   notify: reload caddy
-
-- name: add daily autoreport crontab
-  ansible.builtin.cron:
-    name: autoreport
-    minute: "5"
-    hour: "1,6,13,15"
-    job: "{{ project_path }}/report/trigger_report.sh > /root/autoreport.log 2>&1"
+# The autoreport task is now run by another machine
+# - name: add daily autoreport crontab
+#   ansible.builtin.cron:
+#     name: autoreport
+#     minute: "5"
+#     hour: "1,6,13,15"
+#     job: "{{ project_path }}/report/trigger_report.sh > /root/autoreport.log 2>&1"

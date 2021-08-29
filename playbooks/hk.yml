@@ -1,0 +1,6 @@
+---
+- name: setup hk
+  hosts: hk
+  roles:
+    - arch_common
+    - shadowsocks
