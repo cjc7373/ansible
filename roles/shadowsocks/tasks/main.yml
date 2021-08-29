@@ -1,7 +1,6 @@
 ---
-
 - name: install shadowsocks
-  pacman: name=shadowsocks-libev state=present
+  pacman: name=shadowsocks-rust-git state=present
 
 - name: copy kernel config file
   copy: src=99-sysctl.conf dest=/etc/sysctl.d/ mode=644
@@ -13,10 +12,10 @@
   when: copy_config_res.changed
 
 - name: create shadowsocks config dir
-  file: path=/etc/shadowsocks/ state=directory mode=0755
+  file: path=/etc/shadowsocks-rust/ state=directory mode=0755
 
 - name: copy shadowsocks config
-  template: src=config.json.j2 dest=/etc/shadowsocks/config.json mode=0644
+  template: src=config.json.j2 dest=/etc/shadowsocks-rust/config.json mode=0644
 
 - name: start and enable shadowsocks-server
-  service: name=shadowsocks-libev-server@config.service enabled=yes state=started
+  service: name=shadowsocks-rust-server@config.service enabled=yes state=started
