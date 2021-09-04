@@ -1,7 +1,7 @@
 ---
 
 - name: setup nwu.icu
-  hosts: moo
+  hosts: moo2
   roles:
     - arch_common
     - caddy

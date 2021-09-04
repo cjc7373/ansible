@@ -73,10 +73,10 @@
 - name: add caddy config
   template: src=nwu.icu.caddy.j2 dest=/etc/caddy/conf.d/nwu.icu.caddy mode=0644
   notify: reload caddy
-# The autoreport task is now run by another machine
-# - name: add daily autoreport crontab
-#   ansible.builtin.cron:
-#     name: autoreport
-#     minute: "5"
-#     hour: "1,6,13,15"
-#     job: "{{ project_path }}/report/trigger_report.sh > /root/autoreport.log 2>&1"
+
+- name: add daily autoreport crontab
+  ansible.builtin.cron:
+    name: autoreport
+    minute: "5"
+    hour: "1,6,13,15"
+    job: "{{ project_path }}/report/trigger_report.sh > /root/autoreport.log 2>&1"
