@@ -12,3 +12,4 @@
     - { role: dpb, tags: [dpb] }
     - { role: syncthing, tags: [syncthing] }
     - { role: fava, tags: [fava] }
+    - { role: gitea, tags: [gitea] }

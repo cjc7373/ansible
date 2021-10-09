@@ -1,0 +1,49 @@
+---
+
+- name: install gitea
+  pacman: name=gitea state=present
+
+- name: setup domain
+  ini_file:
+    path: /etc/gitea/app.ini
+    section: server
+    option: DOMAIN
+    value: git.coherence.space
+
+- name: do not listen to 0.0.0.0
+  ini_file:
+    path: /etc/gitea/app.ini
+    section: server
+    option: HTTP_ADDR
+    value: 127.0.0.1
+
+- name: change listen port to 9010
+  ini_file:
+    path: /etc/gitea/app.ini
+    section: server
+    option: HTTP_PORT
+    value: 9010
+
+- name: change database to sqlite3
+  ini_file:
+    path: /etc/gitea/app.ini
+    section: database
+    option: DB_TYPE
+    value: sqlite3
+
+- name: create data directory
+  file: path=/root/gitea state=directory mode=0755
+
+- name: set sqlite3 path
+  ini_file:
+    path: /etc/gitea/app.ini
+    section: database
+    option: PATH
+    value: /root/gitea/gitea.db
+
+- name: start and enable gitea
+  service: name=gitea.service enabled=yes state=started
+
+- name: add caddy config
+  template: src=gitea.caddy.j2 dest=/etc/caddy/conf.d/gitea.caddy mode=0644
+  notify: reload caddy
