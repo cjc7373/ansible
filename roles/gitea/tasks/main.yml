@@ -10,6 +10,20 @@
     option: DOMAIN
     value: git.coherence.space
 
+- name: set site title
+  ini_file:
+    path: /etc/gitea/app.ini
+    section: null
+    option: APP_NAME
+    value: Coherence's git
+
+- name: set base URL
+  ini_file:
+    path: /etc/gitea/app.ini
+    section: server
+    option: ROOT_URL
+    value: https://git.coherence.space
+
 - name: do not listen to 0.0.0.0
   ini_file:
     path: /etc/gitea/app.ini
@@ -31,15 +45,33 @@
     option: DB_TYPE
     value: sqlite3
 
-- name: create data directory
-  file: path=/root/gitea state=directory mode=0755
-
 - name: set sqlite3 path
   ini_file:
     path: /etc/gitea/app.ini
     section: database
     option: PATH
-    value: /root/gitea/gitea.db
+    value: /var/lib/gitea/gitea.db
+
+- name: disable registration
+  ini_file:
+      path: /etc/gitea/app.ini
+      section: service
+      option: DISABLE_REGISTRATION
+      value: true
+
+- name: require sign in to view
+  ini_file:
+      path: /etc/gitea/app.ini
+      section: service
+      option: REQUIRE_SIGNIN_VIEW
+      value: true
+
+- name: increase issue numbers per page
+  ini_file:
+      path: /etc/gitea/app.ini
+      section: ui
+      option: ISSUE_PAGING_NUM
+      value: 100
 
 - name: start and enable gitea
   service: name=gitea.service enabled=yes state=started
