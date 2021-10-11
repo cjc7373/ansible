@@ -1,23 +1,14 @@
 [lo]
 localhost 
 
-[sin]
-sin.coherence.codes	ansible_user=root
-
 [beijing]
 beijing.coherence.codes ansible_user=root
-
-[los_angeles]
-la.coherence.codes ansible_user=root
 
 [moo]
 nwu.icu ansible_user=root
 
 [moo2]
 101.32.47.152 ansible_user=root
-
-[hk]
-hk.coherence.codes ansible_user=root
 
 [hk2]
 hk2.coherence.codes ansible_user=root
