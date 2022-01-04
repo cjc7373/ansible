@@ -5,6 +5,7 @@ After=network.target
 [Service]
 Type=notify
 # the specific user that our service will run as
+# TODO: Is it safe to run as root?
 User=root
 Group=root
 # another option for an even more restricted service is
