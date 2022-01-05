@@ -1,0 +1,7 @@
+{{ domain }}.{{ zone }} {
+    reverse_proxy 127.0.0.1:22214
+    log {
+	    output file /var/log/caddy/plausible_analytics_access.log
+        format console
+    }
+}

@@ -13,3 +13,6 @@
     - { role: syncthing, tags: [syncthing] }
     - { role: fava, tags: [fava] }
     - { role: gitea, tags: [gitea] }
+    - role: plausible_analytics
+      vars: { zone: coherence.space, domain: analytics }
+      tags: [pa]
