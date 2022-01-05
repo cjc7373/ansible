@@ -11,7 +11,7 @@
     - docker-compose.yml
 
 - name: create and start service
-  docker_compose: project_src=/root/fava
+  docker_compose: project_src=/root/fava pull={{ update is defined }}
 
 - name: add caddy config
   template: src=fava.caddy.j2 dest=/etc/caddy/conf.d/fava.caddy mode=0644

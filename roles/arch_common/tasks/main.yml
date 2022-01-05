@@ -6,9 +6,6 @@
 - name: set hostname
   hostname:
     name: "{{ inventory_hostname }}"
-  # FIXME: A bug of ansible
-  # See: https://github.com/ansible/ansible/issues/74556
-  ignore_errors: yes
 
 - name: configure pacman mirror
   template: src=mirrorlist.j2 dest=/etc/pacman.d/mirrorlist owner=root group=root mode=0644

@@ -10,7 +10,7 @@
   docker_compose:
     state: present
     project_src: /root/miniflux
-    pull: true
+    pull: "{{ update is defined }}"
 
 - name: add caddy config
   template: src=miniflux.caddy.j2 dest=/etc/caddy/conf.d/miniflux.caddy mode=0644

@@ -3,7 +3,7 @@
   git:
     repo: https://github.com/NWUCA/NWU.ICU
     dest: "{{ project_path }}"
-    update: yes
+    update: "{{ update is defined }}"
   notify: reload gunicorn
 
   # FIXME: Ideally if the repo is not changed, the following tasks should all be skipped.

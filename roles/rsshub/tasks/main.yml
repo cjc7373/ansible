@@ -7,7 +7,7 @@
   template: src=docker-compose.yml.j2 dest=/root/rsshub/docker-compose.yml mode=0644
 
 - name: create and start service
-  docker_compose: project_src=/root/rsshub
+  docker_compose: project_src=/root/rsshub pull={{ update is defined }}
 
 - name: add caddy config
   template: src=rsshub.caddy.j2 dest=/etc/caddy/conf.d/rsshub.caddy mode=0644
