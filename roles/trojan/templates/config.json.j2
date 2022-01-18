@@ -1,0 +1,19 @@
+{
+    "run_type": "server",
+    "local_addr": "127.0.0.1",
+    "local_port": 12987,
+    "remote_addr": "example.com",
+    "remote_port": 80,
+    "password": [
+        "{{ password }}"
+    ],
+    "transport_plugin": {
+        "enabled": true,
+        "type": "plaintext"
+    },
+    "websocket": {
+        "enabled": true,
+        "path": "/a-very-long-path",
+        "host": "hk.coherence.codes"
+    }
+}

@@ -3,4 +3,6 @@
   hosts: hk2
   roles:
     - arch_common
+    - caddy
     - shadowsocks
+    - trojan

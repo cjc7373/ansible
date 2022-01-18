@@ -1,0 +1,13 @@
+---
+- name: install trojan
+  pacman: name=trojan-go-git state=present
+
+- name: copy trojan config
+  template: src=config.json.j2 dest=/etc/trojan-go/config.json mode=0644
+
+- name: add caddy config
+  template: src=trojan.caddy.j2 dest=/etc/caddy/conf.d/trojan.caddy mode=0644
+  notify: reload caddy
+
+- name: start and enable trojan
+  service: name=trojan-go.service enabled=yes state=started
