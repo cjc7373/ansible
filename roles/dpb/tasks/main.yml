@@ -13,10 +13,19 @@
   register: result
   until: result is success
 
-- name: install requirements to .env
-  pip:
-    requirements: "{{ project_path }}/requirements.txt"
-    virtualenv: "{{ venv_path }}"
+- name: install poetry
+  pacman:
+    name: python-poetry
+    state: present
+
+- name: install dependencies
+  command: poetry install --no-dev
+  args:
+    chdir: "{{ project_path }}"
+  environment:
+    POETRY_VIRTUALENVS_IN_PROJECT: true
+  register: result
+  changed_when: "'Package operations' in result"
 
 - name: create data directory
   file: path="{{ project_path }}/data" state=directory mode=0755 owner=root group=root
