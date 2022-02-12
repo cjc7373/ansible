@@ -8,7 +8,7 @@
     - { role: caddy, tags: [caddy] }
     - { role: miniflux, tags: [miniflux] }
     - { role: beian, tags: [beian] }
-    - rsshub
+    - { role: rsshub, tags: [rsshub]}
     - { role: dpb, tags: [dpb] }
     - { role: syncthing, tags: [syncthing] }
     - { role: fava, tags: [fava] }
