@@ -11,13 +11,8 @@
   template: src=mirrorlist.j2 dest=/etc/pacman.d/mirrorlist owner=root group=root mode=0644
   when: china_mirror
 
-# TODO: pacman config Color and Verbose
-- name: add archlinuxcn repo
-  blockinfile:
-    path: /etc/pacman.conf
-    block: |
-      [archlinuxcn]
-      Server = https://repo.archlinuxcn.org/$arch
+- name: install pacman config
+  template: src=pacman.conf.j2 dest=/etc/pacman.conf mode=0644 owner=root group=root
   notify: update package cache
 
 - name: Flush handlers
