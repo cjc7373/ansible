@@ -68,7 +68,6 @@
     name:
       [
         htop,
-        besttrace,
         neofetch,
         trash-cli,
         strace,

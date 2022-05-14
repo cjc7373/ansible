@@ -16,22 +16,19 @@
 - name: start cronie service
   service: name=cronie enabled=yes state=started
 
-- name: install pipenv
+- name: install poetry
   pacman:
-    name: python-pipenv
+    name: python-poetry
     state: present
 
 - name: install dependencies
-  command: pipenv sync -v
+  command: poetry install --no-dev
   args:
     chdir: "{{ project_path }}"
   environment:
-    PIPENV_VENV_IN_PROJECT: 1
+    POETRY_VIRTUALENVS_IN_PROJECT: true
   register: result
-  changed_when: "'Successfully installed' in result"
-
-- name: print pipenv result
-  debug: var=result
+  changed_when: "'Package operations' in result"
 
 - name: install gunicorn
   pip:
@@ -69,6 +66,11 @@
 
 - name: enable and start gunicorn service
   service: name=nwu.icu.gunicorn enabled=yes state=started
+  when: maintenance is not defined
+
+- name: stop gunicorn if in maintenance mode
+  service: name=nwu.icu.gunicorn enabled=yes state=stopped
+  when: maintenance is defined
 
 - name: add caddy config
   template: src=nwu.icu.caddy.j2 dest=/etc/caddy/conf.d/nwu.icu.caddy mode=0644

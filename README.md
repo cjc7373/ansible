@@ -5,7 +5,8 @@ The file hierarchy and some scripts are from [Archlinux's infrasturcture](https:
 ## Run a playbook
 `ansible-playbook some_playbook.yml`
 
-For some roles, pass a varible `update` with any value to upgrade the service. Like `ansible-playbook some_playbook.yml --extra-vars "update=foo"`
+For some roles, pass a varible `update` with any value to upgrade the service. Like `ansible-playbook some_playbook.yml -e update=t`
+(`-e` equals to `--extra-vars`)
 
 ## Standard Procedure For A New Machine
 - If the login user is not root, make sure we can login with root.
@@ -58,6 +59,7 @@ In my humble opinion, the easiest way is to copy the config (including private k
 
 ## Backup
 There should be at least two backup servers, for the basic redundancy.
+Or we could use [BorgBase](https://www.borgbase.com/), which provides borg repositories hosting. 10 GB free space seems to be enough.
 
 The backup procedure is done in a fixed interval and do not need human interference.
 
