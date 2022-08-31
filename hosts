@@ -12,3 +12,6 @@ nwu.icu ansible_user=root
 
 [hk2]
 hk2.coherence.codes ansible_user=root
+
+[jp]
+jp.coherence.codes ansible_user=root

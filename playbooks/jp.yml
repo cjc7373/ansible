@@ -1,8 +1,7 @@
 ---
-- name: setup hk2
-  hosts: hk2
+- name: setup jp
+  hosts: jp
   roles:
     - arch_common
     - caddy
-    - shadowsocks
     - trojan
