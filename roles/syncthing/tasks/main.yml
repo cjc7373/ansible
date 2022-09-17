@@ -24,4 +24,3 @@
 
 - name: create and start service
   docker_compose: project_src=/root/syncthing
-

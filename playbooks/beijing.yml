@@ -1,9 +1,9 @@
 ---
 
-- name: setup beijing tencent
+- name: Setup beijing tencent
   hosts: beijing
   roles:
-    - { role: arch_common, china_mirror: yes}
+    - { role: arch_common, china_mirror: true}
     - frps
     - { role: caddy, tags: [caddy] }
     - { role: miniflux, tags: [miniflux] }

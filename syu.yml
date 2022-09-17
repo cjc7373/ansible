@@ -1,10 +1,10 @@
 ---
 - name: Update packages
   hosts: lo
-  become: yes
+  become: true
 
   tasks:
     - name: full system upgrade
       pacman:
-        update_cache: yes
-        upgrade: yes
+        update_cache: true
+        upgrade: true

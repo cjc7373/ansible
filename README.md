@@ -51,6 +51,7 @@ Saving password using `keyring set ansible default` (which is provided by python
   Maybe we need to manually download the [docker-compose package](https://archive.archlinux.org/packages/d/docker-compose/docker-compose-1.29.2-1-any.pkg.tar.zst) and ignore its updates.
   - after Python 3.10 update we need to manually rebuild this package
 - shadowsocks role is now deprecated. Use trojan instead.
+- ansible-lint in Ansbile VScode extension is not working
 
 ## Some specific Apps
 ### Syncthing

@@ -2,6 +2,6 @@
 
 - name: install archlinux
   hosts: all
-  become: yes
+  become: true
   roles:
     - install_arch

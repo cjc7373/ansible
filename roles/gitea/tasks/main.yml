@@ -54,24 +54,24 @@
 
 - name: disable registration
   ini_file:
-      path: /etc/gitea/app.ini
-      section: service
-      option: DISABLE_REGISTRATION
-      value: true
+    path: /etc/gitea/app.ini
+    section: service
+    option: DISABLE_REGISTRATION
+    value: true
 
 - name: require sign in to view
   ini_file:
-      path: /etc/gitea/app.ini
-      section: service
-      option: REQUIRE_SIGNIN_VIEW
-      value: true
+    path: /etc/gitea/app.ini
+    section: service
+    option: REQUIRE_SIGNIN_VIEW
+    value: true
 
 - name: increase issue numbers per page
   ini_file:
-      path: /etc/gitea/app.ini
-      section: ui
-      option: ISSUE_PAGING_NUM
-      value: 100
+    path: /etc/gitea/app.ini
+    section: ui
+    option: ISSUE_PAGING_NUM
+    value: 100
 
 - name: start and enable gitea
   service: name=gitea.service enabled=yes state=started
