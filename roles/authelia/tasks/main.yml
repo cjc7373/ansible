@@ -1,0 +1,34 @@
+---
+
+- name: configure dns for authelia
+  cloudflare_dns:
+    api_token: "{{ CLOUDFLARE_API_TOKEN }}"
+    zone: "coherence.space" # FXIME
+    type: CNAME
+    record: "auth"
+    value: "{{ ansible_fqdn }}"
+
+- name: create data directory
+  file: path={{ item }} state=directory mode=0755
+  loop:
+    - /root/authelia
+    - /root/authelia/config
+
+- name: copy authelia docker-compose.yml
+  template: src=docker-compose.yml.j2 dest=/root/authelia/docker-compose.yml mode=0644
+
+- name: copy authelia configs
+  template: src={{ item }}.j2 dest=/root/authelia/config/{{ item }} mode=0644
+  loop:
+    - users_database.yml
+    - configuration.yml
+
+- name: create and start service
+  docker_compose:
+    state: present
+    project_src: /root/authelia
+    pull: "{{ update is defined }}"
+
+- name: add caddy config
+  template: src=authelia.caddy.j2 dest=/etc/caddy/conf.d/authelia.caddy mode=0644
+  notify: reload caddy
