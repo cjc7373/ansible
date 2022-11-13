@@ -6,8 +6,20 @@
 - name: copy rsshub docker-compose.yml
   template: src=docker-compose.yml.j2 dest=/root/rsshub/docker-compose.yml mode=0644
 
+- name: pull docker image
+  command:
+    chdir: /root/rsshub
+    cmd: docker compose pull
+  when: update is defined
+  register: result
+  changed_when: '"Pulling fs layer" in result.stderr'
+
 - name: create and start service
-  docker_compose: project_src=/root/rsshub pull={{ update is defined }}
+  command:
+    chdir: /root/rsshub
+    cmd: docker compose up -d
+  register: result
+  changed_when: '"Starting" in result.stderr'
 
 - name: add caddy config
   template: src=rsshub.caddy.j2 dest=/etc/caddy/conf.d/rsshub.caddy mode=0644

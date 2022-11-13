@@ -19,11 +19,20 @@
     - clickhouse-user-config.xml
     - plausible-conf.env
 
+- name: pull docker image
+  command:
+    chdir: /root/plausible_analytics
+    cmd: docker compose pull
+  when: update is defined
+  register: result
+  changed_when: '"Pulling fs layer" in result.stderr'
+
 - name: create and start service
-  docker_compose:
-    state: present
-    project_src: /root/plausible_analytics
-    pull: "{{ update is defined }}"
+  command:
+    chdir: /root/plausible_analytics
+    cmd: docker compose up -d
+  register: result
+  changed_when: '"Starting" in result.stderr'
 
 - name: add caddy config
   template: src=plausible_analytics.caddy.j2 dest=/etc/caddy/conf.d/plausible_analytics.caddy mode=0644

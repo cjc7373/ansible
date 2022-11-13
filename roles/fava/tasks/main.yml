@@ -10,8 +10,20 @@
   loop:
     - docker-compose.yml
 
+- name: pull docker image
+  command:
+    chdir: /root/fava
+    cmd: docker compose pull
+  when: update is defined
+  register: result
+  changed_when: '"Pulling fs layer" in result.stderr'
+
 - name: create and start service
-  docker_compose: project_src=/root/fava pull={{ update is defined }}
+  command:
+    chdir: /root/fava
+    cmd: docker compose up -d
+  register: result
+  changed_when: '"Starting" in result.stderr'
 
 - name: add caddy config
   template: src=fava.caddy.j2 dest=/etc/caddy/conf.d/fava.caddy mode=0644

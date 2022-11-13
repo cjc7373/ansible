@@ -23,11 +23,20 @@
     - users_database.yml
     - configuration.yml
 
+- name: pull docker image
+  command:
+    chdir: /root/authelia
+    cmd: docker compose pull
+  when: update is defined
+  register: result
+  changed_when: '"Pulling fs layer" in result.stderr'
+
 - name: create and start service
-  docker_compose:
-    state: present
-    project_src: /root/authelia
-    pull: "{{ update is defined }}"
+  command:
+    chdir: /root/authelia
+    cmd: docker compose up -d
+  register: result
+  changed_when: '"Starting" in result.stderr'
 
 - name: add caddy config
   template: src=authelia.caddy.j2 dest=/etc/caddy/conf.d/authelia.caddy mode=0644
