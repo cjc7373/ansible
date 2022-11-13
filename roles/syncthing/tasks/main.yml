@@ -23,4 +23,7 @@
     - config/key.pem
 
 - name: create and start service
-  docker_compose: project_src=/root/syncthing
+  docker_compose:
+    state: present
+    project_src: /root/syncthing
+    pull: "{{ update is defined }}"
