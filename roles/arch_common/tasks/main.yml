@@ -110,3 +110,23 @@
   template: src=jail.local.j2 dest=/etc/fail2ban/jail.local owner=root group=root mode=0644
   notify:
     - restart fail2ban
+
+# https://wiki.archlinux.org/title/Kernel_module#systemd
+- name: load bbr module with systemd
+  copy:
+    content: tcp_bbr
+    dest: /etc/modules-load.d/bbr.conf
+    mode: 0644
+
+- name: copy kernel config file
+  copy: src=50-bbr-sysctl.conf dest=/etc/sysctl.d/ mode=644
+  register: copy_config_res
+
+- name: load the bbr module
+  community.general.modprobe:
+    name: tcp_bbr
+    state: present
+
+- name: apply kernel parameters
+  command: sysctl --system
+  when: copy_config_res.changed
