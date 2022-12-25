@@ -51,7 +51,6 @@ Saving password using `keyring set ansible default` (which is provided by python
   - After some investigation, I think it's hard to migrate the original `community.docker.docker_compose` module to conform docker-compose 2.0, and my use cases are relatively simple.
     So I decided to use `command` module to invoke compose cli. 
   - FIXME: now the logic is repeated in many roles, need to abstract it.
-- shadowsocks role is now deprecated. Use trojan instead.
 - ansible-lint in Ansbile VScode extension is not working
 
 ## Some specific Apps
