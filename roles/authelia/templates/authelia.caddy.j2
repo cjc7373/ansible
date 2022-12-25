@@ -1,3 +1,7 @@
 auth.coherence.space {
     reverse_proxy 127.0.0.1:8045
+    log {
+	    output file /var/log/caddy/authelia_access.log
+        format console
+    }
 }

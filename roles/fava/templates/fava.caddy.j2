@@ -1,8 +1,12 @@
 fava.coherence.space {
     reverse_proxy 127.0.0.1:6674
-    basicauth /* {
-        cjc JDJhJDE0JGdhMVhsMmpkeXNaYVRkeEJVUmdKU09CdU1TTjNXMXhlTHNzU1Z4aXZTMjFVYnIxWGFHLkZT
-    }
+    forward_auth https://auth.coherence.space {
+		uri /api/verify
+        {# This Host rewrite is necessary, See: 
+        https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#https #}
+        header_up Host {upstream_hostport}
+		copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+	}
     log {
 	    output file /var/log/caddy/fava_access.log
         format console

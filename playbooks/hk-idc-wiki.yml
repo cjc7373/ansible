@@ -1,0 +1,7 @@
+---
+
+- name: Setup hk idc-wiki
+  hosts: hk
+  roles:
+    - { role: arch_common }
+    - { role: caddy, tags: [caddy] }

@@ -76,6 +76,7 @@
         speedtest-cli,
         archlinux-contrib,
         ncdu,
+        iperf3,
       ]
     state: present
 
