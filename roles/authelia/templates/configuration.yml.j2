@@ -63,4 +63,24 @@ notifier:
   disable_startup_check: true
   filesystem:
     filename: /config/notification.txt
+
+identity_providers:
+  oidc:
+    hmac_secret: {{ secret }}
+    issuer_private_key: |
+      {{ issuer_private_key | indent(width=6) }}
+    cors:
+      endpoints:
+        - authorization
+        - token
+        - revocation
+        - introspection
+      allowed_origins: "*"
+    clients:
+      - id: miniflux
+        secret: {{ oidc_secret_hash }}
+        authorization_policy: one_factor
+        redirect_uris:
+          - https://rss.coherence.space/oauth2/oidc/callback
+        pre_configured_consent_duration: 1w
 ...

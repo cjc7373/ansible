@@ -11,10 +11,15 @@ services:
       - DATABASE_URL=postgres://miniflux:{{POSTGRES_PASSWORD}}@db/miniflux?sslmode=disable
       - RUN_MIGRATIONS=1
       - CREATE_ADMIN=1
-      - ADMIN_USERNAME=admin
-      - ADMIN_PASSWORD={{ADMIN_PASSWORD}}
+      - ADMIN_USERNAME=coherence
+      - ADMIN_PASSWORD={{ ADMIN_PASSWORD }}
       - POLLING_FREQUENCY=120 # default is 60
       - POLLING_PARSING_ERROR_LIMIT=0 # 0 is unlimited, default is 3
+      - OAUTH2_PROVIDER=oidc
+      - OAUTH2_CLIENT_ID=miniflux
+      - OAUTH2_CLIENT_SECRET={{ oidc_secret }}
+      - OAUTH2_REDIRECT_URL=https://rss.coherence.space/oauth2/oidc/callback
+      - OAUTH2_OIDC_DISCOVERY_ENDPOINT=https://auth.coherence.space
   db:
     image: postgres:13
     environment:
