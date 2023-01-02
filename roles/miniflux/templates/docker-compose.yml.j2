@@ -19,6 +19,8 @@ services:
       - OAUTH2_CLIENT_ID=miniflux
       - OAUTH2_CLIENT_SECRET={{ oidc_secret }}
       - OAUTH2_REDIRECT_URL=https://rss.coherence.space/oauth2/oidc/callback
+      # We don't need to append the discovery URI /.well-known/openid-configuration
+      # cause miniflux will add this for us
       - OAUTH2_OIDC_DISCOVERY_ENDPOINT=https://auth.coherence.space
   db:
     image: postgres:13

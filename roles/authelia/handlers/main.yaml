@@ -1,0 +1,6 @@
+---
+
+- name: restart service
+  command:
+    chdir: /root/authelia
+    cmd: docker compose restart
