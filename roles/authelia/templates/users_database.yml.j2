@@ -9,8 +9,15 @@
 users:
   {{ username }}:
     displayname: "{{ name }}"
-    password: "{{ password_hash }}"  # yamllint disable-line rule:line-length
+    password: "{{ password_hash }}"
     email: {{ email }}
+    groups:
+      - admins
+      - dev
+  john:
+    displayname: john
+    email: john@doe.com
+    password: "{{ john_password_hash }}"
     groups:
       - admins
       - dev

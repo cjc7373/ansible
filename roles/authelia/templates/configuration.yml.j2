@@ -83,4 +83,11 @@ identity_providers:
         redirect_uris:
           - https://rss.coherence.space/oauth2/oidc/callback
         pre_configured_consent_duration: 1w
+
+      - id: grafana
+        secret: {{ oidc_secret_hash }}
+        authorization_policy: one_factor
+        redirect_uris:
+          - https://grafana.coherence.space/login/generic_oauth
+        pre_configured_consent_duration: 1w
 ...

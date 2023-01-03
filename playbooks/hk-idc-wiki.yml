@@ -5,3 +5,5 @@
   roles:
     - { role: arch_common }
     - { role: caddy, tags: [caddy] }
+    - { role: monitoring_exporter, tags: [monitoring_exporter] }
+    - { role: monitoring_server, tags: [monitoring_server] }

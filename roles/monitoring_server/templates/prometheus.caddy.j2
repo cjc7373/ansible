@@ -1,0 +1,7 @@
+prometheus.coherence.space {
+    reverse_proxy 127.0.0.1:9090
+    log {
+	    output file /var/log/caddy/prometheus_access.log
+        format console
+    }
+}

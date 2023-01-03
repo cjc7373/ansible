@@ -1,0 +1,40 @@
+---
+- name: configure dns for prometheus
+  cloudflare_dns:
+    api_token: "{{ CLOUDFLARE_API_TOKEN }}"
+    zone: "coherence.space" # FXIME
+    type: CNAME
+    record: "prometheus"
+    value: "{{ ansible_fqdn }}"
+
+- name: configure dns for grafana
+  cloudflare_dns:
+    api_token: "{{ CLOUDFLARE_API_TOKEN }}"
+    zone: "coherence.space" # FXIME
+    type: CNAME
+    record: "grafana"
+    value: "{{ ansible_fqdn }}"
+
+- name: install prometheus and grafana
+  pacman: name=prometheus,grafana state=present
+
+- name: copy prometheus config
+  template: src=prometheus.yml.j2 dest=/etc/prometheus/prometheus.yml mode=0644
+  notify: restart prometheus
+
+- name: copy grafana config
+  template: src=grafana.ini.j2 dest=/etc/grafana.ini mode=0644
+  notify: restart grafana
+
+- name: copy caddy config
+  template: src={{ item }}.j2 dest=/etc/caddy/conf.d/{{ item }} mode=0644
+  loop:
+    - prometheus.caddy
+    - grafana.caddy
+  notify: reload caddy
+
+- name: start and enable prometheus
+  service: name=prometheus.service enabled=yes state=started
+
+- name: start and enable grafana
+  service: name=grafana.service enabled=yes state=started

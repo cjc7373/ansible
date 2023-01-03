@@ -1,0 +1,7 @@
+---
+- name: install prometheus-node-exporter
+  pacman: name=prometheus-node-exporter state=present
+
+# default runs on :9100
+- name: start and enable prometheus-node-exporter
+  service: name=prometheus-node-exporter.service enabled=yes state=started

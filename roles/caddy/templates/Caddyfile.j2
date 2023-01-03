@@ -18,6 +18,11 @@
         admin "unix//run/caddy/admin.socket"
 
         email {{ email }}
+
+        # FIXME: metrics will be visited by admin endpoint, and that is a socket...
+        servers {
+                metrics
+        }
 }
 
 # Import additional caddy config files in /etc/caddy/conf.d/
