@@ -18,6 +18,20 @@
 - name: install prometheus and grafana
   pacman: name=prometheus,grafana state=present
 
+- name: Create grafana provisioning directory
+  file: path={{ item }} mode=0700 owner=grafana group=grafana state=directory
+  with_items:
+    - /etc/grafana/provisioning
+    - /etc/grafana/provisioning/datasources
+    - /etc/grafana/provisioning/dashboards
+    - /etc/grafana/provisioning/plugins
+    - /etc/grafana/provisioning/notifiers
+    - /var/lib/grafana/dashboards
+
+- name: Install grafana datasources provisioning
+  template: src=datasources.yaml.j2 dest=/etc/grafana/provisioning/datasources/datasources.yml owner=grafana group=root mode=0600
+  notify: restart grafana
+
 - name: copy prometheus config
   template: src=prometheus.yml.j2 dest=/etc/prometheus/prometheus.yml mode=0644
   notify: restart prometheus

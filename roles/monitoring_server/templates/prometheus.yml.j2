@@ -12,3 +12,8 @@ scrape_configs:
     - job_name: 'prometheus'
       static_configs:
           - targets: ['localhost:9090']
+
+    - job_name: 'v2ray'
+      metrics_path: /scrape
+      static_configs:
+          - targets: ['localhost:9550']
