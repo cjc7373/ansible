@@ -10,8 +10,14 @@ scrape_configs:
           - targets: ['localhost:9100']
 
     - job_name: 'prometheus'
+      scheme: https
       static_configs:
-          - targets: ['localhost:9090']
+          - targets: ['prometheus.coherence.space']
+
+    - job_name: 'grafana'
+      scheme: https
+      static_configs:
+          - targets: ['grafana.coherence.space']
 
     - job_name: 'v2ray'
       metrics_path: /scrape

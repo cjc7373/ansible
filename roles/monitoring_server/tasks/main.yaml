@@ -36,6 +36,11 @@
   template: src=prometheus.yml.j2 dest=/etc/prometheus/prometheus.yml mode=0644
   notify: restart prometheus
 
+- name: validate prometheus config
+  ansible.builtin.command: promtool check config /etc/prometheus/prometheus.yml
+  register: result
+  changed_when: 'result.rc != 0'
+
 - name: copy grafana config
   template: src=grafana.ini.j2 dest=/etc/grafana.ini mode=0644
   notify: restart grafana
