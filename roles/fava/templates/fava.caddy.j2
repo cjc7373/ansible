@@ -1,7 +1,7 @@
 fava.coherence.space {
     reverse_proxy 127.0.0.1:6674
     forward_auth https://auth.coherence.space {
-		uri /api/verify?rd=https://fava.coherence.space
+		uri /api/verify?rd=https://auth.coherence.space
         {# This Host rewrite is necessary, See: 
         https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#https #}
         header_up Host {upstream_hostport}
