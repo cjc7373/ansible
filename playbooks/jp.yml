@@ -5,3 +5,4 @@
     - arch_common
     - caddy
     - trojan
+    - { role: monitoring_exporter, tags: [monitoring_exporter] }

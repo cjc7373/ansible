@@ -17,3 +17,4 @@
       vars: { zone: coherence.space, domain: analytics }
       tags: [pa]
     - { role: authelia, tags: [authelia] }
+    - { role: monitoring_exporter, tags: [monitoring_exporter] }

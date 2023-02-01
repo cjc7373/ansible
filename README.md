@@ -59,6 +59,9 @@ Migrate syncthing to a new machine seems to be uneasy.
 
 In my humble opinion, the easiest way is to copy the config (including private key, but excluding the database), and delete and re-add the sync folder manually.
 
+### Authelia
+OIDC Endpoints: https://www.authelia.com/integration/openid-connect/introduction/#well-known-discovery-endpoints
+
 ## Backup
 There should be at least two backup servers, for the basic redundancy.
 Or we could use [BorgBase](https://www.borgbase.com/), which provides borg repositories hosting. 10 GB free space seems to be enough.
