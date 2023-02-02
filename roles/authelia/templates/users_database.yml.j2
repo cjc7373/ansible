@@ -19,6 +19,10 @@ users:
     email: john@doe.com
     password: "{{ john_password_hash }}"
     groups:
-      - admins
+      - dev
+  test:
+    displayname: test
+    password: "{{ password_hash }}"
+    groups:
       - dev
 ...

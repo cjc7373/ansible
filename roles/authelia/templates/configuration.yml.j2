@@ -30,6 +30,14 @@ authentication_backend:
 access_control:
   default_policy: deny
   rules:
+    - domain: "*.coherence.space"
+      policy: one_factor
+      subject:
+        - "group:admins"
+    - domain: "fava.coherence.space"
+      policy: deny
+      subject:
+        - "group:dev"
     # Rules applied to everyone
     - domain: "*.coherence.space"
       policy: one_factor
@@ -50,9 +58,9 @@ session:
     # password: authelia
 
 regulation:
-  max_retries: 3
-  find_time: 120
-  ban_time: 300
+  max_retries: 5
+  find_time: 2m
+  ban_time: 5m
 
 storage:
   encryption_key: {{ secret }}
