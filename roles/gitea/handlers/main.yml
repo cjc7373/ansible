@@ -1,0 +1,4 @@
+---
+
+- name: reload gitea
+  systemd: name=gitea state=restarted

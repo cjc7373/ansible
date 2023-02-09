@@ -3,75 +3,9 @@
 - name: install gitea
   pacman: name=gitea state=present
 
-- name: setup domain
-  ini_file:
-    path: /etc/gitea/app.ini
-    section: server
-    option: DOMAIN
-    value: git.coherence.space
-
-- name: set site title
-  ini_file:
-    path: /etc/gitea/app.ini
-    section: null
-    option: APP_NAME
-    value: Coherence's git
-
-- name: set base URL
-  ini_file:
-    path: /etc/gitea/app.ini
-    section: server
-    option: ROOT_URL
-    value: https://git.coherence.space
-
-- name: do not listen to 0.0.0.0
-  ini_file:
-    path: /etc/gitea/app.ini
-    section: server
-    option: HTTP_ADDR
-    value: 127.0.0.1
-
-- name: change listen port to 9010
-  ini_file:
-    path: /etc/gitea/app.ini
-    section: server
-    option: HTTP_PORT
-    value: 9010
-
-- name: change database to sqlite3
-  ini_file:
-    path: /etc/gitea/app.ini
-    section: database
-    option: DB_TYPE
-    value: sqlite3
-
-- name: set sqlite3 path
-  ini_file:
-    path: /etc/gitea/app.ini
-    section: database
-    option: PATH
-    value: /var/lib/gitea/gitea.db
-
-- name: disable registration
-  ini_file:
-    path: /etc/gitea/app.ini
-    section: service
-    option: DISABLE_REGISTRATION
-    value: true
-
-- name: require sign in to view
-  ini_file:
-    path: /etc/gitea/app.ini
-    section: service
-    option: REQUIRE_SIGNIN_VIEW
-    value: true
-
-- name: increase issue numbers per page
-  ini_file:
-    path: /etc/gitea/app.ini
-    section: ui
-    option: ISSUE_PAGING_NUM
-    value: 100
+- name: copy gitea config file
+  template: src=app.ini.j2 dest=/etc/gitea/app.ini mode=0644
+  notify: reload gitea
 
 - name: start and enable gitea
   service: name=gitea.service enabled=yes state=started

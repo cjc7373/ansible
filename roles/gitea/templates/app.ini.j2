@@ -1,0 +1,21 @@
+APP_NAME = "Coherence's git"
+
+[server]
+DOMAIN = "git.coherence.space"
+ROOT_URL = "https://git.coherence.space"
+HTTP_ADDR = 127.0.0.1
+HTTP_PORT = 9010
+
+[database]
+DB_TYPE = sqlite3
+PATH = /var/lib/gitea/gitea.db
+
+[service]
+DISABLE_REGISTRATION = true
+REQUIRE_SIGNIN_VIEW = true
+
+[ui]
+ISSUE_PAGING_NUM = 100
+
+[session]
+SESSION_LIFE_TIME = 8640000  # 100 days
