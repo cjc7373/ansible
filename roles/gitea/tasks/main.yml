@@ -4,7 +4,7 @@
   pacman: name=gitea state=present
 
 - name: copy gitea config file
-  template: src=app.ini.j2 dest=/etc/gitea/app.ini mode=0644 user=gitea group=gitea
+  template: src=app.ini.j2 dest=/etc/gitea/app.ini mode=0644 owner=gitea group=gitea
   notify: restart gitea
 
 - name: start and enable gitea
