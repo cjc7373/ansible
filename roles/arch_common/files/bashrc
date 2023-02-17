@@ -1,4 +1,4 @@
-PS1='\[\e[01;31m\][\u@\h\[\e[01;36m\] \W\[\e[01;31m\]]\$\[\e[00m\] '
+PS1='\[\e[01;31m\][\u@\H\[\e[01;36m\] \W\[\e[01;31m\]]\$\[\e[00m\] '
 
 # color support
 alias ls='ls --color=auto'
