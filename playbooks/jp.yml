@@ -3,6 +3,7 @@
   hosts: jp
   roles:
     - arch_common
+    - { role: tailscale, tags: [tailscale] }
     - caddy
     - trojan
     - { role: monitoring_exporter, tags: [monitoring_exporter] }

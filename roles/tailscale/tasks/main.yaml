@@ -1,0 +1,23 @@
+# See also: https://github.com/artis3n/ansible-role-tailscale/blob/main/tasks/install.yml
+
+- name: Install tailscale
+  pacman: name=tailscale state=present
+
+- name: Enable service
+  systemd: name=tailscaled state=started enabled=true
+
+- name: Install | Check if Tailscale is connected
+  ansible.builtin.command: tailscale status
+  changed_when: false
+  register: tailscale_status
+  failed_when:
+    - tailscale_status.rc != 0
+    - "'Logged out.' not in tailscale_status.stdout"
+    - "'not logged in' not in tailscale_status.stdout"
+
+- name: Install | Bring Tailscale Up
+  ansible.builtin.command: tailscale up --authkey={{ tailscale_authkey }}
+  when: >
+    'Logged out.' in tailscale_status.stdout
+    or 'not logged in' in tailscale_status.stdout
+  notify: Confirm Tailscale is Connected

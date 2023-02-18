@@ -3,6 +3,10 @@
 #   ansible.builtin.debug:
 #     var: ansible_facts
 
+# - name: print inventory_hostname
+#   ansible.builtin.debug:
+#     var: inventory_hostname
+
 - name: set hostname
   hostname:
     name: "{{ inventory_hostname }}"

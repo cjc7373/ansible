@@ -70,9 +70,6 @@ The backup procedure is done in a fixed interval and do not need human interfere
 
 I'm wondering if the restore procedure can be automated, or at least documented..
 
-## Notes
-- Idempotence is IMPORTANT! Think about it when adding a task.
-
 ### Gunicorn
 `community.general.gunicorn` doesn't seem to support reload. (Because it runs gunicorn as a daemon) So I choose to stick on the systemd service.
 
