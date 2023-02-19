@@ -59,6 +59,9 @@ Migrate syncthing to a new machine seems to be uneasy.
 
 In my humble opinion, the easiest way is to copy the config (including private key, but excluding the database), and delete and re-add the sync folder manually.
 
+### Tailscale
+Tailscale's NAT traversal techniques work with most firewalls out of the box. I've tested with firewalld and it works as expected. So there is no need to allow some ports manually in firewalld.
+
 ### Authelia
 OIDC Endpoints: https://www.authelia.com/integration/openid-connect/introduction/#well-known-discovery-endpoints
 

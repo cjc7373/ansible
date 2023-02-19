@@ -21,3 +21,10 @@
     'Logged out.' in tailscale_status.stdout
     or 'not logged in' in tailscale_status.stdout
   notify: Confirm Tailscale is Connected
+
+- name: Set firewalld rules
+  command: firewall-cmd --permanent --zone=trusted --add-interface=tailscale0
+  register: firewalld_status
+  changed_when: '"ALREADY_ENABLED" not in firewalld_status.stderr'
+  notify:
+    - reload firewalld

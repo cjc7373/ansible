@@ -64,6 +64,7 @@
         python-virtualenv,
         which,
         fail2ban,
+        firewalld,
       ]
     state: present
 
@@ -116,12 +117,25 @@
   notify:
     - restart fail2ban
 
+- name: Enable and start firewalld
+  service: name=firewalld enabled=yes state=started
+
+- name: Copy firewalld config
+  template: src=firewalld.conf.j2 dest=/etc/firewalld/firewalld.conf owner=root group=root mode=0644
+  notify:
+    - reload firewalld
+
+- name: Copy firewalld public zone config
+  template: src=firewalld_public.xml.j2 dest=/etc/firewalld/zones/public.xml owner=root group=root mode=0644
+  notify:
+    - reload firewalld
+
 # https://wiki.archlinux.org/title/Kernel_module#systemd
 - name: load bbr module with systemd
   copy:
     content: tcp_bbr
     dest: /etc/modules-load.d/bbr.conf
-    mode: 0644
+    mode: "0644"
 
 - name: copy kernel config file
   copy: src=50-bbr-sysctl.conf dest=/etc/sysctl.d/ mode=644
