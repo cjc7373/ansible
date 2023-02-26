@@ -28,3 +28,5 @@
   changed_when: '"ALREADY_ENABLED" not in firewalld_status.stderr'
   notify:
     - reload firewalld
+
+# Note: roles/arch_common/tasks/main.yml also has some tailscale configs

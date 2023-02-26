@@ -62,6 +62,13 @@ In my humble opinion, the easiest way is to copy the config (including private k
 ### Tailscale
 Tailscale's NAT traversal techniques work with most firewalls out of the box. I've tested with firewalld and it works as expected. So there is no need to allow some ports manually in firewalld.
 
+Tailscale's auth key expires every 90 days. We need to manually update it.
+
+### Firewalld
+It may block docker interfaces.. Docker has support for auto-config firewalld, but this require firewalld running and loading configs before creating containers.
+See: https://github.com/moby/libnetwork/pull/2548
+https://docs.docker.com/network/iptables/#integration-with-firewalld
+
 ### Authelia
 OIDC Endpoints: https://www.authelia.com/integration/openid-connect/introduction/#well-known-discovery-endpoints
 

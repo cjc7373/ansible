@@ -120,6 +120,10 @@
 - name: Enable and start firewalld
   service: name=firewalld enabled=yes state=started
 
+# expose tailscale ports are needed because NAT traversal does not always work
+- name: Add firewalld service
+  template: src=firewalld_tailscale.xml.j2 dest=/etc/firewalld/services/tailscale.xml mode=0644 owner=root group=root
+
 - name: Copy firewalld config
   template: src=firewalld.conf.j2 dest=/etc/firewalld/firewalld.conf owner=root group=root mode=0644
   notify:
