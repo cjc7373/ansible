@@ -5,3 +5,11 @@ prometheus.coherence.space {
         format console
     }
 }
+
+prometheus-longterm.coherence.space {
+    reverse_proxy 127.0.0.1:9091
+    log {
+	    output file /var/log/caddy/prometheus_longterm_access.log
+        format console
+    }
+}

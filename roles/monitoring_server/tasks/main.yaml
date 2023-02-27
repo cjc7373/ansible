@@ -7,6 +7,14 @@
     record: "prometheus"
     value: "{{ ansible_fqdn }}"
 
+- name: configure dns for prometheus longterm
+  cloudflare_dns:
+    api_token: "{{ CLOUDFLARE_API_TOKEN }}"
+    zone: "coherence.space" # FXIME
+    type: CNAME
+    record: "prometheus-longterm"
+    value: "{{ ansible_fqdn }}"
+
 - name: configure dns for grafana
   cloudflare_dns:
     api_token: "{{ CLOUDFLARE_API_TOKEN }}"
@@ -32,12 +40,22 @@
   template: src=datasources.yaml.j2 dest=/etc/grafana/provisioning/datasources/datasources.yml owner=grafana group=root mode=0600
   notify: restart grafana
 
+- name: mkdir for prometheus-longterm database
+  file: path=/var/lib/prometheus-longterm state=directory mode=0755 owner=prometheus group=prometheus
+
+- name: copy prometheus-longterm config
+  template: src=prometheus-longterm.yml.j2 dest=/etc/prometheus/prometheus-longterm.yml mode=0644
+  notify: restart prometheus-longterm
+
 - name: copy prometheus config
   template: src=prometheus.yml.j2 dest=/etc/prometheus/prometheus.yml mode=0644
   notify: restart prometheus
 
 - name: validate prometheus config
-  ansible.builtin.command: promtool check config /etc/prometheus/prometheus.yml
+  ansible.builtin.command: promtool check config /etc/prometheus/{{ item }}.yml
+  loop:
+    - prometheus
+    - prometheus-longterm
   register: result
   changed_when: 'result.rc != 0'
 
@@ -51,6 +69,13 @@
     - prometheus.caddy
     - grafana.caddy
   notify: reload caddy
+
+- name: Install prometheus-longterm service
+  template: src=prometheus-longterm.service.j2 dest=/etc/systemd/system/prometheus-longterm.service owner=root group=root mode=0644
+  notify: restart prometheus-longterm
+
+- name: start and enable prometheus-longterm
+  service: name=prometheus-longterm.service enabled=yes state=started
 
 - name: start and enable prometheus
   service: name=prometheus.service enabled=yes state=started

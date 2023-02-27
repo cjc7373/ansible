@@ -4,3 +4,6 @@
 
 - name: restart grafana
   service: name=grafana.service state=restarted
+
+- name: restart prometheus-longterm
+  service: name=prometheus-longterm.service state=restarted
