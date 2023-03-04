@@ -23,3 +23,7 @@ scrape_configs:
       metrics_path: /scrape
       static_configs:
           - targets: ['localhost:9550']
+
+    - job_name: "caddy"
+      static_configs:
+          - targets: ['beijing:2019']

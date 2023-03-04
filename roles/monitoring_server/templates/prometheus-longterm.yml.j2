@@ -1,2 +1,7 @@
 global:
   scrape_interval: 1h
+
+scrape_configs:
+  - job_name: "miniflux"
+    static_configs:
+      - targets: ['localhost:8123']
