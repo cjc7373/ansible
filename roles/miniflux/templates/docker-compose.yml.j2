@@ -9,6 +9,7 @@ services:
         condition: service_healthy
     environment:
       - DATABASE_URL=postgres://miniflux:{{POSTGRES_PASSWORD}}@db/miniflux?sslmode=disable
+      - BASE_URL=https://rss.coherence.space/
       - RUN_MIGRATIONS=1
       - CREATE_ADMIN=1
       - ADMIN_USERNAME=coherence
@@ -22,6 +23,10 @@ services:
       # We don't need to append the discovery URI /.well-known/openid-configuration
       # cause miniflux will add this for us
       - OAUTH2_OIDC_DISCOVERY_ENDPOINT=https://auth.coherence.space
+      - CLEANUP_REMOVE_SESSIONS_DAYS=365
+      # disable cleanup (since the total amount of entries is relatively small)
+      - CLEANUP_ARCHIVE_UNREAD_DAYS=-1
+      - CLEANUP_ARCHIVE_READ_DAYS=-1
   db:
     image: postgres:13
     environment:
