@@ -93,8 +93,11 @@ PrintMotd no # pam does that
 #TCPKeepAlive yes
 #PermitUserEnvironment no
 #Compression delayed
-#ClientAliveInterval 0
-#ClientAliveCountMax 3
+
+# Some firewalls will drop idle connections, so send heartbeat packets
+# are necessary to keep the session alive
+ClientAliveInterval 60
+ClientAliveCountMax 3
 #UseDNS no
 #PidFile /run/sshd.pid
 #MaxStartups 10:30:100
