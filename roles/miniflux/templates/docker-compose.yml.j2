@@ -2,6 +2,7 @@ version: '3'
 services:
   miniflux:
     image: miniflux/miniflux:latest
+    restart: always
     ports:
       - "127.0.0.1:9001:8080"
     depends_on:
@@ -29,6 +30,7 @@ services:
       - CLEANUP_ARCHIVE_READ_DAYS=-1
   db:
     image: postgres:13
+    restart: always
     environment:
       - POSTGRES_USER=miniflux
       - POSTGRES_PASSWORD={{POSTGRES_PASSWORD}}
