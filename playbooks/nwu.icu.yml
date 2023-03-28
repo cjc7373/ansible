@@ -1,8 +1,10 @@
 ---
 
 - name: setup nwu.icu
-  hosts: moo2
+  hosts: moo
   roles:
     - arch_common
-    - caddy
+    - { role: tailscale, tags: [tailscale] }
+    - { role: caddy, tags: [caddy] }
+    - { role: monitoring_exporter, tags: [monitoring_exporter] }
     - { role: nwu.icu, tags: [nwu.icu] }
