@@ -82,6 +82,7 @@
         archlinux-contrib,
         ncdu,
         iperf3,
+        lsof,
       ]
     state: present
 

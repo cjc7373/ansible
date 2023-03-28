@@ -13,7 +13,7 @@ services:
       - POSTGRES_PASSWORD=postgres
 
   plausible_events_db:
-    image: yandex/clickhouse-server:21.3.2.5
+    image: clickhouse/clickhouse-server:22.6-alpine
     restart: always
     volumes:
       - ./event-data:/var/lib/clickhouse
@@ -25,7 +25,7 @@ services:
         hard: 262144
 
   plausible:
-    image: plausible/analytics:latest
+    image: plausible/analytics:v1.5
     restart: always
     command: sh -c "sleep 10 && /entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh db init-admin && /entrypoint.sh run"
     depends_on:
