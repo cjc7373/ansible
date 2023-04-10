@@ -1,5 +1,4 @@
 ---
-
 - name: install archlinux
   hosts: all
   become: true

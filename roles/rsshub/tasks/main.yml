@@ -1,5 +1,4 @@
 ---
-
 - name: create data directory
   file: path=/root/rsshub state=directory mode=0755
 

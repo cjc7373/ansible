@@ -1,5 +1,4 @@
 ---
-
 - name: setup nwu.icu
   hosts: moo
   roles:

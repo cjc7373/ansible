@@ -1,3 +1,4 @@
+---
 # See also: https://github.com/artis3n/ansible-role-tailscale/blob/main/tasks/install.yml
 
 - name: Install tailscale

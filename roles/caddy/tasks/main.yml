@@ -1,5 +1,4 @@
 ---
-
 - name: install caddy
   pacman: name=caddy state=present
 

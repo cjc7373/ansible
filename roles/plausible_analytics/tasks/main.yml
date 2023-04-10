@@ -1,5 +1,4 @@
 ---
-
 - name: configure dns
   cloudflare_dns:
     api_token: "{{ CLOUDFLARE_API_TOKEN }}"

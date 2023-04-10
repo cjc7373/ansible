@@ -1,12 +1,11 @@
 ---
-
 - name: check if archlinux is already installed
   fail: msg="archlinux already installed"
   when: ansible_distribution == "Archlinux"
 
 - name: double confirm
   pause:
-     prompt: |
+    prompt: |
       This operation will erase all data!!!
       The target host is: "{{ inventory_hostname }}"
 

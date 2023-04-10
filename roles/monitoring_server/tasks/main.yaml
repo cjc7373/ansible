@@ -2,25 +2,25 @@
 - name: configure dns for prometheus
   cloudflare_dns:
     api_token: "{{ CLOUDFLARE_API_TOKEN }}"
-    zone: "coherence.space" # FXIME
+    zone: coherence.space # FXIME
     type: CNAME
-    record: "prometheus"
+    record: prometheus
     value: "{{ ansible_fqdn }}"
 
 - name: configure dns for prometheus longterm
   cloudflare_dns:
     api_token: "{{ CLOUDFLARE_API_TOKEN }}"
-    zone: "coherence.space" # FXIME
+    zone: coherence.space # FXIME
     type: CNAME
-    record: "prometheus-longterm"
+    record: prometheus-longterm
     value: "{{ ansible_fqdn }}"
 
 - name: configure dns for grafana
   cloudflare_dns:
     api_token: "{{ CLOUDFLARE_API_TOKEN }}"
-    zone: "coherence.space" # FXIME
+    zone: coherence.space # FXIME
     type: CNAME
-    record: "grafana"
+    record: grafana
     value: "{{ ansible_fqdn }}"
 
 - name: install prometheus and grafana
@@ -57,7 +57,7 @@
     - prometheus
     - prometheus-longterm
   register: result
-  changed_when: 'result.rc != 0'
+  changed_when: result.rc != 0
 
 - name: copy grafana config
   template: src=grafana.ini.j2 dest=/etc/grafana.ini mode=0644

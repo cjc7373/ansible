@@ -1,5 +1,4 @@
 ---
-
 - name: install frps
   pacman: name=frps state=present
 

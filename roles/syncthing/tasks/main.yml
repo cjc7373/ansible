@@ -1,5 +1,4 @@
 ---
-
 # FIXME: fix the permission issues
 - name: create syncthing directory
   file: path={{ item }} state=directory mode=0777

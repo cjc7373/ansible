@@ -1,5 +1,4 @@
 ---
-
 # This role is currently for a reverse proxy for telegram bot api.
 # In the future, there may be more reverse proxies to be added in this role.
 - name: add caddy config

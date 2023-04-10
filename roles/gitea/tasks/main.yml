@@ -1,5 +1,4 @@
 ---
-
 - name: install gitea
   pacman: name=gitea state=present
 

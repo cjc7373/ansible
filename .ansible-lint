@@ -1,5 +1,7 @@
+---
 skip_list:
-    - name[casing]
-    - fqcn-builtins
+  - name[casing]
+  - fqcn-builtins
+  - no-free-form
 
 profile: basic

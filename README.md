@@ -84,4 +84,4 @@ I'm wondering if the restore procedure can be automated, or at least documented.
 `community.general.gunicorn` doesn't seem to support reload. (Because it runs gunicorn as a daemon) So I choose to stick on the systemd service.
 
 ## Services not controlled with ansible
-- None
+- miniflux exporter, and its related systemd unit

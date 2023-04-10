@@ -53,37 +53,22 @@
 - name: install necessary packages
   pacman:
     name:
-      [
-        vim,
-        git,
-        pacman-contrib,
-        docker,
-        python-docker,
-        docker-compose,
-        bash-completion,
-        python-virtualenv,
-        which,
-        fail2ban,
-        firewalld,
-      ]
+      - vim
+      - git
+      - pacman-contrib
+      - docker
+      - python-docker
+      - docker-compose
+      - bash-completion
+      - python-virtualenv
+      - which
+      - fail2ban
+      - firewalld
     state: present
 
 - name: install some tools
   pacman:
-    name:
-      [
-        htop,
-        neofetch,
-        trash-cli,
-        strace,
-        bind,
-        rsync,
-        speedtest-cli,
-        archlinux-contrib,
-        ncdu,
-        iperf3,
-        lsof,
-      ]
+    name: [htop, neofetch, trash-cli, strace, bind, rsync, speedtest-cli, archlinux-contrib, ncdu, iperf3, lsof]
     state: present
 
 - name: enable and start docker

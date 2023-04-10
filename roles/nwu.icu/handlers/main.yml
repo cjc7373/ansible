@@ -1,5 +1,4 @@
 ---
-
 - name: reload gunicorn
   service: name=nwu.icu.gunicorn state=reloaded
 

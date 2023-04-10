@@ -1,11 +1,10 @@
 ---
-
 - name: configure dns for authelia
   cloudflare_dns:
     api_token: "{{ CLOUDFLARE_API_TOKEN }}"
-    zone: "coherence.space" # FXIME
+    zone: coherence.space # FXIME
     type: CNAME
-    record: "auth"
+    record: auth
     value: "{{ ansible_fqdn }}"
 
 - name: create data directory

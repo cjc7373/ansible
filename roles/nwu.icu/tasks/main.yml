@@ -6,8 +6,8 @@
     update: "{{ update is defined }}"
   notify: reload gunicorn
 
-  # FIXME: Ideally if the repo is not changed, the following tasks should all be skipped.
-  # But if so, we lost the ability to retry when one following task fails...
+# FIXME: Ideally if the repo is not changed, the following tasks should all be skipped.
+# But if so, we lost the ability to retry when one following task fails...
 - name: install cronie
   pacman:
     name: cronie
@@ -37,7 +37,7 @@
     state: latest
 
 - name: backup database before migration
-  copy: "src={{ project_path }}/db.sqlite3 dest={{ project_path }}/db.sqlite3.backup backup=yes remote_src=yes"
+  copy: src={{ project_path }}/db.sqlite3 dest={{ project_path }}/db.sqlite3.backup backup=yes remote_src=yes
 
 - name: create/update database table
   django_manage:
