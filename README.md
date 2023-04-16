@@ -44,6 +44,7 @@ Saving password using `keyring set ansible default` (which is provided by python
 - Upgrade strategy. For now upgrade is executed manually with `pacman -Syu` and `reboot`.
   Should the system be upgraded every time a playbook runs? Or upgraged only when a specific variable is defined?
 - configure docker image mirror
+- fix ansible-lint errors
 
 ## Issues
 - docker-compose module requires docker-compose < 2.0.0, because of a major [rewrite](https://github.com/ansible-collections/community.docker/issues/216).
