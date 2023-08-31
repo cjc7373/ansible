@@ -1,6 +1,7 @@
 ---
+# FIXME: trojan-go-git was removed from archlinuxcn, need to install manually
 - name: install trojan
-  pacman: name=trojan-go-git state=present
+  pacman: name=trojan-go-bin state=present
 
 - name: copy trojan config
   template: src=config.json.j2 dest=/etc/trojan-go/config.json mode=0644

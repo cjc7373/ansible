@@ -1,5 +1,5 @@
-; [lo]
-; localhost 
+[lo]
+localhost 
 
 [beijing]
 beijing.coherence.codes ansible_user=root
@@ -12,6 +12,3 @@ nwu.icu ansible_user=root
 
 [hk]
 hk.coherence.codes ansible_user=root
-
-[jp]
-jp.coherence.codes ansible_user=root
