@@ -68,7 +68,7 @@
 
 - name: install some tools
   pacman:
-    name: [htop, neofetch, trash-cli, strace, bind, rsync, speedtest-cli, archlinux-contrib, ncdu, iperf3, lsof]
+    name: [htop, neofetch, trash-cli, strace, bind, rsync, speedtest-cli, archlinux-contrib, ncdu, iperf3, lsof, screen]
     state: present
 
 - name: enable and start docker
@@ -85,6 +85,7 @@
   with_items:
     - bashrc
     - bash_profile
+    - screenrc
 
 - name: install pip conf
   template: src=pip.conf.j2 dest=/etc/pip.conf owner=root group=root mode=0644

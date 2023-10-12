@@ -1,0 +1,4 @@
+# to enable mouse scroll
+termcapinfo xterm* ti@:te@
+# to increase scroll back buffer
+defscrollback 100000

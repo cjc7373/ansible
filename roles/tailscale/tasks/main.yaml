@@ -7,6 +7,12 @@
 - name: Enable service
   systemd: name=tailscaled state=started enabled=true
 
+# https://tailscale.com/kb/1103/exit-nodes
+- name: add firewalld rule to make exit node work
+  command: firewall-cmd --permanent --add-masquerade
+  notify:
+    - reload firewalld
+
 - name: Install | Check if Tailscale is connected
   ansible.builtin.command: tailscale status
   changed_when: false
@@ -15,12 +21,14 @@
     - tailscale_status.rc != 0
     - "'Logged out.' not in tailscale_status.stdout"
     - "'not logged in' not in tailscale_status.stdout"
+    - "'Tailscale is stopped.' not in tailscale_status.stdout"
 
 - name: Install | Bring Tailscale Up
-  ansible.builtin.command: tailscale up --authkey={{ tailscale_authkey }}
+  ansible.builtin.command: tailscale up --authkey={{ tailscale_authkey }} --advertise-exit-node
   when: >
     'Logged out.' in tailscale_status.stdout
     or 'not logged in' in tailscale_status.stdout
+    or 'Tailscale is stopped.' not in tailscale_status.stdout
   notify: Confirm Tailscale is Connected
 
 - name: Set firewalld rules
