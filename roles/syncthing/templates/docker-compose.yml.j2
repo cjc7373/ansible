@@ -8,4 +8,6 @@ services:
       - ./:/var/syncthing
     environment:
       - STGUIADDRESS=
+      - PUID=0
+      - PGUI=0
     network_mode: "host"

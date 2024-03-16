@@ -1,19 +1,19 @@
 ---
 # FIXME: fix the permission issues
 - name: create syncthing directory
-  file: path={{ item }} state=directory mode=0777
+  file: path={{ item }} state=directory mode=0755
   loop:
     - /root/syncthing
     - /root/syncthing/config
 
 - name: copy syncthing configs
-  template: src={{ item }}.j2 dest=/root/syncthing/{{ item }} mode=0666
+  template: src={{ item }}.j2 dest=/root/syncthing/{{ item }} mode=0644
   loop:
     - docker-compose.yml
 
 - name: copy main syncthing config
   # the config.xml should be copyed when the destination does not exist, cause syncthing will change the config file
-  template: src=config/config.xml.j2 dest=/root/syncthing/config/config.xml mode=0666 force=no
+  template: src=config/config.xml.j2 dest=/root/syncthing/config/config.xml mode=0644 force=no
 
 - name: copy private and public keys
   copy: src={{ item }} dest=/root/syncthing/{{ item }} mode=0644
