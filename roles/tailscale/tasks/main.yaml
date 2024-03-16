@@ -13,22 +13,22 @@
   notify:
     - reload firewalld
 
-- name: Install | Check if Tailscale is connected
-  ansible.builtin.command: tailscale status
+- name: Check if Tailscale is connected
+  ansible.builtin.command: tailscale status --json
   changed_when: false
   register: tailscale_status
   failed_when:
     - tailscale_status.rc != 0
-    - "'Logged out.' not in tailscale_status.stdout"
-    - "'not logged in' not in tailscale_status.stdout"
-    - "'Tailscale is stopped.' not in tailscale_status.stdout"
 
-- name: Install | Bring Tailscale Up
+- name: Parse status JSON
+  vars:
+    tailscale_status_parsed: "{{ tailscale_status.stdout | from_json }}"
+  ansible.builtin.set_fact:
+    tailscale_is_online: "{{  tailscale_status_parsed.Self.Online }}"
+
+- name: Bring Tailscale Up
   ansible.builtin.command: tailscale up --authkey={{ tailscale_authkey }} --advertise-exit-node
-  when: >
-    'Logged out.' in tailscale_status.stdout
-    or 'not logged in' in tailscale_status.stdout
-    or 'Tailscale is stopped.' not in tailscale_status.stdout
+  when: not tailscale_is_online
   notify: Confirm Tailscale is Connected
 
 - name: Set firewalld rules
