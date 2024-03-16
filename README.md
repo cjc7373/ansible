@@ -70,6 +70,11 @@ It may block docker interfaces.. Docker has support for auto-config firewalld, b
 See: https://github.com/moby/libnetwork/pull/2548
 https://docs.docker.com/network/iptables/#integration-with-firewalld
 
+Some principles:
+- public zone rejects any incoming traffic except some pre-defined services
+- for the ease of testing, ports 50000-51000 are open
+- trusted zone (which includes tailscale interface) accepts any incoming traffic 
+
 ### Authelia
 OIDC Endpoints: https://www.authelia.com/integration/openid-connect/introduction/#well-known-discovery-endpoints
 
