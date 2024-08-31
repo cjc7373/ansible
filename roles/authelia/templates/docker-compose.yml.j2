@@ -7,7 +7,7 @@ networks:
 
 services:
   authelia:
-    image: authelia/authelia
+    image: {{ docker_mirror }}/authelia/authelia
     container_name: authelia
     volumes:
       - ./config:/config
@@ -24,7 +24,7 @@ services:
       - TZ=Aisa/Shanghai
 
   redis:
-    image: redis:alpine
+    image: {{ docker_mirror }}/library/redis:alpine
     container_name: redis
     volumes:
       - ./redis:/data

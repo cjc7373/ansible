@@ -49,7 +49,6 @@
 # TODO: zram swap if needed
 # TODO: logs
 
-# The `which` package is necessary for pipenv to find proper python interpreter
 - name: install necessary packages
   pacman:
     name:
@@ -61,14 +60,13 @@
       - docker-compose
       - bash-completion
       - python-virtualenv
-      - which
       - fail2ban
       - firewalld
     state: present
 
 - name: install some tools
   pacman:
-    name: [htop, neofetch, trash-cli, strace, bind, rsync, speedtest-cli, archlinux-contrib, ncdu, iperf3, lsof, screen]
+    name: [htop, neofetch, trash-cli, strace, bind, rsync, speedtest-cli, archlinux-contrib, ncdu, iperf3, lsof, screen, jq, which]
     state: present
 
 - name: enable and start docker

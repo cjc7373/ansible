@@ -2,30 +2,28 @@
 - name: configure dns for authelia
   cloudflare_dns:
     api_token: "{{ CLOUDFLARE_API_TOKEN }}"
-    zone: coherence.space # FIXME
+    zone: coherence.codes
     type: CNAME
-    record: auth
+    record: docker
     value: "{{ ansible_fqdn }}"
 
 - name: create data directory
   file: path={{ item }} state=directory mode=0755
   loop:
-    - /root/authelia
-    - /root/authelia/config
+    - /root/docker-registry
 
-- name: copy authelia docker-compose.yml
-  template: src=docker-compose.yml.j2 dest=/root/authelia/docker-compose.yml mode=0644
+- name: copy docker-compose.yml
+  template: src=docker-compose.yml.j2 dest=/root/docker-registry/docker-compose.yml mode=0644
 
-- name: copy authelia configs
-  template: src={{ item }}.j2 dest=/root/authelia/config/{{ item }} mode=0644
+- name: copy configs
+  template: src={{ item }}.j2 dest=/root/docker-registry/config/{{ item }} mode=0644
   loop:
     - users_database.yml
-    - configuration.yml
   notify: restart service
 
 - name: pull docker image
   command:
-    chdir: /root/authelia
+    chdir: /root/docker-registry
     cmd: docker compose pull
   when: update is defined
   register: result
@@ -33,11 +31,11 @@
 
 - name: create and start service
   command:
-    chdir: /root/authelia
+    chdir: /root/docker-registry
     cmd: docker compose up -d
   register: result
   changed_when: '"Starting" in result.stderr'
 
 - name: add caddy config
-  template: src=authelia.caddy.j2 dest=/etc/caddy/conf.d/authelia.caddy mode=0644
+  template: src=docker-registry.caddy.j2 dest=/etc/caddy/conf.d/docker-registry.caddy mode=0644
   notify: reload caddy

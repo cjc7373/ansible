@@ -7,8 +7,5 @@ beijing.coherence.codes ansible_user=root
 [moo]
 nwu.icu ansible_user=root
 
-; [moo2]
-; 43.154.18.232 ansible_user=root
-
 [hk]
 hk.coherence.codes ansible_user=root
