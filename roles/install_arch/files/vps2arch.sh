@@ -36,7 +36,7 @@ get_mirrors() {
 	country=$1
 	
 	[ -z $country ] && country=$(get_country || echo -n "all")
-	_download "https://www.archlinux.org/mirrorlist/?country=$country&protocol=http&protocol=https&ip_version=4&use_mirror_status=on" | grep -oP '(?<=#Server = ).*(?=\$repo/)' || get_mirrors all
+	_download "https://archlinux.org/mirrorlist/?country=$country&protocol=http&protocol=https&ip_version=4&use_mirror_status=on" | grep -oP '(?<=#Server = ).*(?=\$repo/)' || get_mirrors all
 }
 
 cpu_type=$(uname -m)
@@ -55,11 +55,11 @@ download() {
 
 download_and_extract_bootstrap() {
 	local sha256 filename
-	download iso/latest/sha256sums.txt | egrep "[[:digit:]]-$cpu_type.tar.gz" > "sha256sums.txt"
+	download iso/latest/sha256sums.txt | egrep "[[:digit:]]-$cpu_type.tar.zst" > "sha256sums.txt"
 	read -r sha256 filename < "sha256sums.txt"
 	download "iso/latest/$filename" > "$filename"
 	sha256sum -c sha256sums.txt || exit 1
-	tar -xpzf "$filename"
+	tar -xpf "$filename"
 	rm -f "$filename"
 
 	if grep -E '^nameserver\s+127\.' /etc/resolv.conf > /dev/null; then
@@ -228,14 +228,14 @@ configure_bootloader() {
 configure_network() {
 	local gateway dev ip
 
-	read -r dev gateway <<-EOF
-		$(awk '$2 == "00000000" { ip = strtonum(sprintf("0x%s", $3));
-			printf ("%s\t%d.%d.%d.%d", $1,
-			rshift(and(ip,0x000000ff),00), rshift(and(ip,0x0000ff00),08),
-			rshift(and(ip,0x00ff0000),16), rshift(and(ip,0xff000000),24)) ; exit }' < /proc/net/route)
-	EOF
-
-	set -- $(ip addr show dev "$dev" | awk '($1 == "inet") { print $2 }')
+	dev=$(ls /sys/class/net | grep -v lo)
+	if [ -n "$(ip -4 route show default | awk '{ print $3 }')" ]; then
+		gateway=$(ip -4 route show default | awk '{ print $3 }')
+		set -- $(ip addr show dev "$dev" | awk '($1 == "inet") { print $2 }')
+	else
+		gateway=$(ip -6 route show default | awk '{ print $3 }')
+		set -- $(ip addr show dev "$dev" | awk '($1 == "inet6" && $2 !~ /^fe80/) { print $2 }')
+	fi
 	ip=$@
 
 	# set the mtu
@@ -306,9 +306,12 @@ finalize() {
 	cat <<-EOF
 		Hi,
 		your VM has successfully been reimaged with Arch Linux.
+
 		This script configured $bootloader as bootloader and $network for networking.
+
 		When you are finished with your post-installation, you'll need to reboot the VM the rough way:
 		# sync ; reboot -f
+
 		Then you'll be able to connect to your VM using SSH and to login using your old root password (or "vps2arch" if you didn't have a root password).
 	EOF
 }
@@ -339,11 +342,14 @@ while getopts ":b:m:n:h" opt; do
 	h)
 		cat <<-EOF
 			usage: ${0##*/} [options]
+
 			  Options:
 			    -b (grub|syslinux)           Use the specified bootloader. When this option is omitted, it defaults to grub.
 			    -n (systemd-networkd|netctl) Use the specified networking configuration system. When this option is omitted, it defaults to systemd-networkd.
 			    -m mirror                    Use the provided mirror (you can specify this option more than once).
+
 			    -h                           Print this help message
+
 			    Warning:
 			      On OpenVZ containers the bootloader will be not installed and the networking configuration system will be enforced to netctl.
 		EOF
