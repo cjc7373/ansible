@@ -4,8 +4,5 @@ localhost
 [beijing]
 beijing.coherence.codes ansible_user=root
 
-[moo]
-nwu.icu ansible_user=root
-
 [hk]
 hk.coherence.codes ansible_user=root

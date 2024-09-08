@@ -12,7 +12,6 @@ scrape_configs:
             - "deskmini:9100"
             - "beijing:9100"
             - "friendlywrt:9100"
-            - "nwu-icu:9100"
 
     - job_name: 'prometheus'
       scheme: https
@@ -31,4 +30,4 @@ scrape_configs:
 
     - job_name: "caddy"
       static_configs:
-          - targets: ['beijing:2019', "nwu-icu:2019"]
+          - targets: ['beijing:2019']
