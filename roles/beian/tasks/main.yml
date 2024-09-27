@@ -3,7 +3,10 @@
   file: path=/var/www/beian state=directory mode=0755 owner=caddy group=caddy
 
 - name: copy html
-  template: src=index.html.j2 dest=/var/www/beian/index.html mode=0644 owner=caddy group=caddy
+  template: src={{ item }}.j2 dest=/var/www/beian/{{ item }} mode=0644 owner=caddy group=caddy
+  loop:
+    - index.html
+    - raft.html
 
 - name: add caddy config
   template: src=beian.caddy.j2 dest=/etc/caddy/conf.d/beian.caddy mode=0644
