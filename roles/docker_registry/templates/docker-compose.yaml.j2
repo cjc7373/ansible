@@ -1,6 +1,6 @@
 services:
   dockerhub:
-    image: "registry:2.8.3"
+    image: {{ docker_registry }}/library/registry:2.8.3
     container_name: "dockerhub"
     restart: "always"
     volumes:

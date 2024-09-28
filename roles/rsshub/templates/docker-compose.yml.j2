@@ -2,7 +2,7 @@ version: '3'
 
 services:
     rsshub:
-        image: diygod/rsshub:latest
+        image: {{ docker_registry }}/diygod/rsshub:latest
         restart: always
         ports:
             - '127.0.0.1:1200:1200'
@@ -15,5 +15,5 @@ services:
 
     browserless:
         # See issue 6680
-        image: browserless/chrome:1.43-chrome-stable
+        image: {{ docker_registry }}/browserless/chrome:1.43-chrome-stable
         restart: always

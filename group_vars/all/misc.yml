@@ -8,4 +8,4 @@ email: niuchangcun@gmail.com
 
 auth_server: https://auth.coherence.space
 
-docker_mirror: docker.coherence.codes
+docker_registry: docker.io
