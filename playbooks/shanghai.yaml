@@ -1,0 +1,8 @@
+---
+- name: Setup shanghai
+  hosts: shanghai
+  roles:
+    - { role: arch_common, china_mirror: true }
+    # - { role: tailscale, tags: [tailscale] }
+    - { role: caddy, tags: [caddy] }
+    # - { role: monitoring_exporter, tags: [monitoring_exporter] }

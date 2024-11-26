@@ -7,7 +7,8 @@
   pause:
     prompt: |
       This operation will erase all data!!!
-      The target host is: "{{ inventory_hostname }}"
+      The target host is: "{{ inventory_hostname -}}"
+      Press Ctrl+C to abort, enter to continue.
 
 - name: copy vps2arch script
   copy: src=vps2arch.sh dest=/tmp/vps2arch.sh mode=0755
@@ -17,9 +18,9 @@
   command: /tmp/vps2arch.sh
   register: result
 
-- name: print result
-  debug:
-    var: result
+# - name: print result
+#   debug:
+#     var: result
 
 # pubkey operations are copyed from archlinux infrastructure
 - name: assign pubkey list to fact
