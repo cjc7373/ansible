@@ -1,5 +1,5 @@
 ---
-- name: Setup hk idc-wiki
+- name: Setup hk
   hosts: hk
   roles:
     - { role: arch_common }

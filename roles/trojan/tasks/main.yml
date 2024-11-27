@@ -1,7 +1,30 @@
 ---
-# FIXME: trojan-go-git was removed from archlinuxcn, need to install manually
-- name: install trojan
-  pacman: name=trojan-go-bin state=present
+- name: check if trojan-go exists
+  command: pacman -Qs trojan-go
+  register: result
+  ignore_errors: true
+  changed_when: result.rc != 0
+
+- name: create build directory
+  file: path=/var/build/trojan-go state=directory mode=0755 owner=build group=build recurse=true
+
+- name: copy trojan-go pkgbuild
+  template: src=PKGBUILD.j2 dest=/var/build/trojan-go/PKGBUILD mode=0644
+  when: result.rc != 0
+
+- name: build trojan-go
+  command:
+    chdir: /var/build/trojan-go
+    cmd: makepkg
+  become: true
+  become_method: ansible.builtin.su
+  become_user: build
+  when: result.rc != 0
+
+- name: install trojan-go
+  command:
+    cmd: pacman --noconfirm -U /var/build/trojan-go/trojan-go-bin-0.10.6-2-x86_64.pkg.tar.zst
+  when: result.rc != 0
 
 - name: copy trojan config
   template: src=config.json.j2 dest=/etc/trojan-go/config.json mode=0644
