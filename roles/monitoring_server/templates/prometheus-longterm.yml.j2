@@ -2,6 +2,29 @@ global:
   scrape_interval: 1h
 
 scrape_configs:
-  - job_name: "miniflux"
+  - job_name: "esp32"
+    metrics_path: /esp32/metrics
+    scrape_interval: 15s
     static_configs:
-      - targets: ['localhost:8123']
+      - targets: ['deskmini:80']
+    metric_relabel_configs:
+      - source_labels: [ name ]
+        target_label: "type"
+        regex: "(.*)_(.*)"
+        replacement: ${1}
+      - source_labels: [ name ]
+        target_label: "room"
+        regex: "(.*)_(.*)"
+        replacement: ${2}
+      - source_labels: [ room ]
+        target_label: "room"
+        regex: "subbedroom"
+        replacement: 次卧
+      - source_labels: [ room ]
+        target_label: "room"
+        regex: "livingroom"
+        replacement: 客厅
+      - source_labels: [ room ]
+        target_label: "room"
+        regex: "study"
+        replacement: 书房

@@ -63,6 +63,7 @@
       - fail2ban
       - firewalld
       - base-devel # for package build
+      - less
     state: present
 
 - name: install some tools
