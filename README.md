@@ -14,6 +14,7 @@ For some roles, pass a varible `update` with any value to upgrade the service. L
 - Run `ansible-playbook playbooks/install_arch.yml -l host_name -v --ask-pass`
 - Input the root password.
 - Double confirm installation when playbook is paused.
+- install iptables-nft (it conflicts with iptables so that it can't be installed automatically)
 
 The playbook will have a warning:
 `[WARNING]: sftp transfer mechanism failed on [test.nwu.icu]. Use ANSIBLE_DEBUG=1 to see detailed information`

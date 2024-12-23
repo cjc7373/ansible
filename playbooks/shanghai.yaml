@@ -3,6 +3,7 @@
   hosts: shanghai
   roles:
     - { role: arch_common, china_mirror: true }
-    # - { role: tailscale, tags: [tailscale] }
+    - { role: tailscale, tags: [tailscale] }
     - { role: caddy, tags: [caddy] }
-    # - { role: monitoring_exporter, tags: [monitoring_exporter] }
+    - { role: monitoring_exporter, tags: [monitoring_exporter] }
+    - { role: derp, tags: [derp] }

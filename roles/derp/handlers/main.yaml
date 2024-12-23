@@ -1,0 +1,3 @@
+---
+- name: restart derp
+  systemd: name=derper state=restarted
