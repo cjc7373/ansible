@@ -5,7 +5,7 @@
     zone: "{{ zone }}"
     type: CNAME
     record: "{{ domain }}"
-    value: "{{ ansible_fqdn }}"
+    value: "{{ inventory_hostname }}"
 
 - name: create data directory
   file: path=/root/plausible_analytics state=directory mode=0755

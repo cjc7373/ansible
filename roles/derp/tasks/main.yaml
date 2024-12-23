@@ -5,7 +5,7 @@
     zone: coherence.space # FIXME
     type: CNAME
     record: ts
-    value: "{{ ansible_fqdn }}"
+    value: "{{ inventory_hostname }}"
 
 - name: install derp
   pacman: name=derper state=present

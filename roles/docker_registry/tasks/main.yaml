@@ -5,7 +5,7 @@
     zone: coherence.codes
     type: CNAME
     record: docker
-    value: "{{ ansible_fqdn }}"
+    value: "{{ inventory_hostname }}"
 
 - name: create data directory
   file: path={{ item }} state=directory mode=0755

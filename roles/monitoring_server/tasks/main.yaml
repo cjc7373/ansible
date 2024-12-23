@@ -5,7 +5,7 @@
     zone: coherence.space # FXIME
     type: CNAME
     record: prometheus
-    value: "{{ ansible_fqdn }}"
+    value: "{{ inventory_hostname }}"
 
 - name: configure dns for prometheus longterm
   cloudflare_dns:
@@ -13,7 +13,7 @@
     zone: coherence.space # FXIME
     type: CNAME
     record: prometheus-longterm
-    value: "{{ ansible_fqdn }}"
+    value: "{{ inventory_hostname }}"
 
 - name: configure dns for grafana
   cloudflare_dns:
@@ -21,7 +21,7 @@
     zone: coherence.space # FXIME
     type: CNAME
     record: grafana
-    value: "{{ ansible_fqdn }}"
+    value: "{{ inventory_hostname }}"
 
 - name: install prometheus and grafana
   pacman: name=prometheus,grafana state=present
