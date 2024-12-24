@@ -24,11 +24,6 @@ scrape_configs:
       static_configs:
           - targets: ['grafana.coherence.space']
 
-    - job_name: 'v2ray'
-      metrics_path: /scrape
-      static_configs:
-          - targets: ['localhost:9550']
-
     - job_name: "caddy"
       static_configs:
           - targets: ['beijing:2019']

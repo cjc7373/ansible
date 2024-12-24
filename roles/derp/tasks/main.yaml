@@ -18,5 +18,5 @@
   service: name=derper.service enabled=yes state=started
 
 - name: add caddy config
-  template: src=derp.caddy.j2 dest=/etc/caddy/conf.d/gitea.caddy mode=0644
+  template: src=derp.caddy.j2 dest=/etc/caddy/conf.d/derp.caddy mode=0644
   notify: reload caddy
