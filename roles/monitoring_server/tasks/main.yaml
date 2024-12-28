@@ -37,7 +37,18 @@
     - /var/lib/grafana/dashboards
 
 - name: Install grafana datasources provisioning
-  template: src=datasources.yaml.j2 dest=/etc/grafana/provisioning/datasources/datasources.yml owner=grafana group=root mode=0600
+  template: src=datasources.yaml.j2 dest=/etc/grafana/provisioning/datasources/datasources.yml owner=grafana group=grafana mode=0600
+  notify: restart grafana
+
+- name: Install grafana dashboards provisioning
+  template: src=dashboards.yaml.j2 dest=/etc/grafana/provisioning/dashboards/dashboards.yml owner=grafana group=grafana mode=0600
+  notify: restart grafana
+
+- name: create dashboards dir
+  file: path=/etc/grafana/dashboards state=directory owner=grafana group=grafana mode=0755
+
+- name: copy dashboards
+  copy: src=dashboards/ dest=/etc/grafana/dashboards/ owner=grafana group=grafana mode=0644
   notify: restart grafana
 
 - name: mkdir for prometheus-longterm database

@@ -4,11 +4,13 @@ datasources:
 - name: Prometheus
   type: prometheus
   access: proxy
+  uid: prometheus
   url: http://localhost:9090
   editable: false
 
 - name: Prometheus-longterm
   type: prometheus
   access: proxy
+  uid: prometheus-longterm
   url: http://localhost:9091
   editable: false
