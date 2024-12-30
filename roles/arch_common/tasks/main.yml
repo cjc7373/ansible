@@ -33,6 +33,9 @@
 - name: start and enable systemd-timesyncd
   service: name=systemd-timesyncd enabled=yes state=started
 
+- name: start and enable systemd-resolved
+  service: name=systemd-resolved enabled=yes state=started
+
 - name: set timezone to China Standard Time
   community.general.timezone:
     name: Asia/Shanghai
