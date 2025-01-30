@@ -1,0 +1,33 @@
+---
+- name: configure dns for joplin_server
+  cloudflare_dns:
+    api_token: "{{ CLOUDFLARE_API_TOKEN }}"
+    zone: coherence.space # FIXME
+    type: CNAME
+    record: joplin
+    value: "{{ inventory_hostname }}"
+
+- name: create data directory
+  file: path=/root/joplin_server state=directory mode=0755
+
+- name: copy joplin_server docker-compose.yml
+  template: src=docker-compose.yml.j2 dest=/root/joplin_server/docker-compose.yml mode=0644
+
+- name: pull docker image
+  command:
+    chdir: /root/joplin_server
+    cmd: docker compose pull
+  when: update is defined
+  register: result
+  changed_when: '"Pulling fs layer" in result.stderr'
+
+- name: create and start service
+  command:
+    chdir: /root/joplin_server
+    cmd: docker compose up -d
+  register: result
+  changed_when: '"Starting" in result.stderr'
+
+- name: add caddy config
+  template: src=joplin_server.caddy.j2 dest=/etc/caddy/conf.d/joplin_server.caddy mode=0644
+  notify: reload caddy

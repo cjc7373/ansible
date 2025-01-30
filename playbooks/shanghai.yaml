@@ -7,3 +7,4 @@
     - { role: caddy, tags: [caddy] }
     - { role: monitoring_exporter, tags: [monitoring_exporter] }
     - { role: derp, tags: [derp] }
+    - { role: joplin_server, tags: [joplin_server] }
