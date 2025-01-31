@@ -1,4 +1,12 @@
 ---
+- name: configure dns for derp
+  cloudflare_dns:
+    api_token: "{{ CLOUDFLARE_API_TOKEN }}"
+    zone: coherence.space 
+    type: CNAME
+    record: fava
+    value: "{{ inventory_hostname }}"
+
 - name: create fava directory
   file: path={{ item }} state=directory mode=0755
   loop:

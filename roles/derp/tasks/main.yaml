@@ -2,7 +2,7 @@
 - name: configure dns for derp
   cloudflare_dns:
     api_token: "{{ CLOUDFLARE_API_TOKEN }}"
-    zone: coherence.space # FIXME
+    zone: coherence.space
     type: CNAME
     record: ts
     value: "{{ inventory_hostname }}"

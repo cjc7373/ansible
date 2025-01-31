@@ -1,4 +1,12 @@
 ---
+- name: configure dns for gitea
+  cloudflare_dns:
+    api_token: "{{ CLOUDFLARE_API_TOKEN }}"
+    zone: coherence.space
+    type: CNAME
+    record: git
+    value: "{{ inventory_hostname }}"
+
 - name: install gitea
   pacman: name=gitea state=present
 

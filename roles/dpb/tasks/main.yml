@@ -1,4 +1,12 @@
 ---
+- name: configure dns for dpb
+  cloudflare_dns:
+    api_token: "{{ CLOUDFLARE_API_TOKEN }}"
+    zone: coherence.space
+    type: CNAME
+    record: paste
+    value: "{{ inventory_hostname }}"
+
 - name: clone or pull git repo
   git:
     repo: https://github.com/cjc7373/dpb.git

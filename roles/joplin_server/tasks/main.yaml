@@ -2,7 +2,7 @@
 - name: configure dns for joplin_server
   cloudflare_dns:
     api_token: "{{ CLOUDFLARE_API_TOKEN }}"
-    zone: coherence.space # FIXME
+    zone: coherence.space
     type: CNAME
     record: joplin
     value: "{{ inventory_hostname }}"

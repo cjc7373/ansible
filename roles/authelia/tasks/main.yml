@@ -2,7 +2,7 @@
 - name: configure dns for authelia
   cloudflare_dns:
     api_token: "{{ CLOUDFLARE_API_TOKEN }}"
-    zone: coherence.space # FIXME
+    zone: coherence.space
     type: CNAME
     record: auth
     value: "{{ inventory_hostname }}"

@@ -1,4 +1,20 @@
 ---
+- name: configure dns part1
+  cloudflare_dns:
+    api_token: "{{ CLOUDFLARE_API_TOKEN }}"
+    zone: coherence.space
+    type: CNAME
+    record: www
+    value: "{{ inventory_hostname }}"
+
+- name: configure dns part2
+  cloudflare_dns:
+    api_token: "{{ CLOUDFLARE_API_TOKEN }}"
+    zone: coherence.space
+    type: CNAME
+    record: "@"
+    value: "{{ inventory_hostname }}"
+
 - name: create data directory
   file: path=/var/www/beian state=directory mode=0755 owner=caddy group=caddy
 

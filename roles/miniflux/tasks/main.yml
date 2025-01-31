@@ -1,4 +1,12 @@
 ---
+- name: configure dns for miniflus
+  cloudflare_dns:
+    api_token: "{{ CLOUDFLARE_API_TOKEN }}"
+    zone: coherence.space
+    type: CNAME
+    record: rss
+    value: "{{ inventory_hostname }}"
+
 - name: create data directory
   file: path=/root/miniflux state=directory mode=0755
 
