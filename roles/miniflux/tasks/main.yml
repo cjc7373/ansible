@@ -1,5 +1,5 @@
 ---
-- name: configure dns for miniflus
+- name: configure dns for miniflux
   cloudflare_dns:
     api_token: "{{ CLOUDFLARE_API_TOKEN }}"
     zone: coherence.space

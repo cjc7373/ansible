@@ -1,0 +1,12 @@
+# TODO: full config
+- name: configure dns for jitsi
+  cloudflare_dns:
+    api_token: "{{ CLOUDFLARE_API_TOKEN }}"
+    zone: coherence.space
+    type: CNAME
+    record: meeting
+    value: "{{ inventory_hostname }}"
+
+- name: add caddy config
+  template: src=jitsi.caddy.j2 dest=/etc/caddy/conf.d/jitsi.caddy mode=0644
+  notify: reload caddy

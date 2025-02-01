@@ -1,0 +1,7 @@
+meeting.coherence.space {
+    reverse_proxy 127.0.0.1:10987
+    log {
+	   output file /var/log/caddy/meeting_access.log
+        format console
+    }
+}
