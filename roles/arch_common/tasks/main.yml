@@ -67,6 +67,9 @@
       - firewalld
       - base-devel # for package build
       - less
+      - sysstat # provides iostat
+      - man-db
+      - man-pages
     state: present
 
 - name: install some tools
