@@ -1,3 +1,0 @@
----
-- name: reload gunicorn
-  service: name=dpb.gunicorn state=reloaded

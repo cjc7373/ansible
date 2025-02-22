@@ -7,53 +7,30 @@
     record: paste
     value: "{{ inventory_hostname }}"
 
-- name: clone or pull git repo
-  git:
-    repo: https://github.com/cjc7373/dpb.git
-    dest: "{{ project_path }}"
-    update: "{{ update is defined }}"
-  notify: reload gunicorn
-  # Github operations are very likely to fail in China..
-  retries: 5
-  delay: 3
+- name: create dpb directory
+  file: path={{ item }} state=directory mode=0755
+  loop:
+    - /root/dpb-rs
+
+- name: copy dpb configs
+  template: src={{ item }}.j2 dest=/root/dpb-rs/{{ item }} mode=0644
+  loop:
+    - docker-compose.yml
+
+- name: pull docker image
+  command:
+    chdir: /root/dpb-rs
+    cmd: docker compose pull
+  when: update is defined
   register: result
-  until: result is success
+  changed_when: '"Pulling fs layer" in result.stderr'
 
-- name: install poetry
-  pacman:
-    name: python-poetry
-    state: present
-
-- name: install dependencies
-  command: poetry install
-  args:
-    chdir: "{{ project_path }}"
-  environment:
-    POETRY_VIRTUALENVS_IN_PROJECT: true
+- name: create and start service
+  command:
+    chdir: /root/dpb-rs
+    cmd: docker compose up -d
   register: result
-  changed_when: "'Package operations' in result"
-
-- name: create data directory
-  file: path="{{ project_path }}/data" state=directory mode=0755 owner=root group=root
-
-- name: create database
-  django_manage:
-    command: migrate
-    project_path: "{{ project_path }}"
-    virtualenv: "{{ venv_path }}"
-
-# TODO: create superuser
-
-- name: install gunicorn
-  pip:
-    virtualenv: "{{ venv_path }}"
-    name: gunicorn
-
-- name: copy gunicorn systemd service
-  template: src=dpb.gunicorn.service.j2 dest=/etc/systemd/system/dpb.gunicorn.service owner=root group=root mode=0644
-
-- name: enable and start gunicorn service
-  service: name=dpb.gunicorn enabled=yes state=started
+  changed_when: '"Starting" in result.stderr'
 
 - name: add caddy config
   template: src=dpb.caddy.j2 dest=/etc/caddy/conf.d/dpb.caddy mode=0644

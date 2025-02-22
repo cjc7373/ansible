@@ -1,0 +1,9 @@
+services:
+    dpb:
+        image: {{ docker_registry }}/cjc7373/dpb:1.0
+        container_name: dpb
+        restart: always
+        volumes:
+            - ./data:/app/data
+        ports:
+            - 127.0.0.1:1300:8080
