@@ -34,7 +34,8 @@
     - /etc/grafana/provisioning/dashboards
     - /etc/grafana/provisioning/plugins
     - /etc/grafana/provisioning/notifiers
-    - /var/lib/grafana/dashboards
+    - /etc/grafana/provisioning/alerting
+    - /etc/grafana/dashboards
 
 - name: Install grafana datasources provisioning
   template: src=datasources.yaml.j2 dest=/etc/grafana/provisioning/datasources/datasources.yml owner=grafana group=grafana mode=0600
@@ -44,11 +45,16 @@
   template: src=dashboards.yaml.j2 dest=/etc/grafana/provisioning/dashboards/dashboards.yml owner=grafana group=grafana mode=0600
   notify: restart grafana
 
-- name: create dashboards dir
-  file: path=/etc/grafana/dashboards state=directory owner=grafana group=grafana mode=0755
-
 - name: copy dashboards
   copy: src=dashboards/ dest=/etc/grafana/dashboards/ owner=grafana group=grafana mode=0644
+  notify: restart grafana
+
+- name: copy alerting config
+  template: src=alerting/{{ item }}.j2 dest=/etc/grafana/provisioning/alerting/{{ item }} owner=grafana group=grafana mode=0644
+  with_items:
+    - contact_points.yaml
+    - notification_policies.yaml
+    - rules.yaml
   notify: restart grafana
 
 - name: mkdir for prometheus-longterm database

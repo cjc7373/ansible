@@ -1,0 +1,14 @@
+apiVersion: 1
+contactPoints:
+    - orgId: 1
+      name: Telegram
+      receivers:
+        - uid: ae57v3p3nss1td
+          type: telegram
+          settings:
+            bottoken: {{ monitoring_server_telegram_bottoken }}
+            chatid: "{{ monitoring_server_telegram_chatid }}"
+            disable_notification: false
+            disable_web_page_preview: false
+            protect_content: false
+          disableResolveMessage: false
