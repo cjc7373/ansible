@@ -1,15 +1,13 @@
-version: '3'
 services:
   miniflux:
     image: {{ docker_registry }}/miniflux/miniflux:latest
     restart: always
+    networks:
+      - database
     ports:
       - "127.0.0.1:9001:8080"
-    depends_on:
-      db:
-        condition: service_healthy
     environment:
-      - DATABASE_URL=postgres://miniflux:{{POSTGRES_PASSWORD}}@db/miniflux?sslmode=disable
+      - DATABASE_URL=postgres://{{POSTGRES_USER}}:{{POSTGRES_PASSWORD}}@postgresql/miniflux?sslmode=disable
       - BASE_URL=https://rss.coherence.space/
       - RUN_MIGRATIONS=1
       - CREATE_ADMIN=1
@@ -29,15 +27,7 @@ services:
       # disable cleanup (since the total amount of entries is relatively small)
       - CLEANUP_ARCHIVE_UNREAD_DAYS=-1
       - CLEANUP_ARCHIVE_READ_DAYS=-1
-  db:
-    image: {{ docker_registry }}/library/postgres:13
-    restart: always
-    environment:
-      - POSTGRES_USER=miniflux
-      - POSTGRES_PASSWORD={{POSTGRES_PASSWORD}}
-    volumes:
-      - ./data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD", "pg_isready", "-U", "miniflux"]
-      interval: 10s
-      start_period: 30s
+networks:
+  database:
+    external: true
+

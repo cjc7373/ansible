@@ -1,19 +1,14 @@
-version: "3.3"
 services:
   mail:
     image: {{ docker_registry }}/bytemark/smtp
+    networks:
+      - default
     restart: always
-
-  plausible_db:
-    image: {{ docker_registry }}/library/postgres:12
-    restart: always
-    volumes:
-      - ./db-data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_PASSWORD=postgres
 
   plausible_events_db:
     image: {{ docker_registry }}/clickhouse/clickhouse-server:22.6-alpine
+    networks:
+      - default
     restart: always
     volumes:
       - ./event-data:/var/lib/clickhouse
@@ -26,10 +21,12 @@ services:
 
   plausible:
     image: {{ docker_registry }}/plausible/analytics:v2.0.0
+    networks:
+      - default
+      - database
     restart: always
     command: sh -c "sleep 10 && /entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh db init-admin && /entrypoint.sh run"
     depends_on:
-      - plausible_db
       - plausible_events_db
       - mail
     ports:
@@ -41,3 +38,6 @@ services:
         soft: 262144
         hard: 262144
 
+networks:
+  database:
+    external: true

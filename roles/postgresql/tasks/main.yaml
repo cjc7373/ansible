@@ -1,0 +1,21 @@
+---
+- name: create data directory
+  file: path=/root/postgresql state=directory mode=0755
+
+- name: copy postgresql docker-compose.yml
+  template: src=docker-compose.yaml.j2 dest=/root/postgresql/docker-compose.yaml mode=0644
+
+- name: pull docker image
+  command:
+    chdir: /root/postgresql
+    cmd: docker compose pull
+  when: update is defined
+  register: result
+  changed_when: '"Pulling fs layer" in result.stderr'
+
+- name: create and start service
+  command:
+    chdir: /root/postgresql
+    cmd: docker compose up -d
+  register: result
+  changed_when: '"Starting" in result.stderr'
