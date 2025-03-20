@@ -1,0 +1,12 @@
+# pushed to docker hub as cjc7373/caddy
+
+FROM caddy:2.9-builder AS builder
+
+ENV GOPROXY=https://goproxy.cn,direct
+
+RUN xcaddy build \
+    --with github.com/caddy-dns/cloudflare
+
+FROM caddy:2.9
+
+COPY --from=builder /usr/bin/caddy /usr/bin/caddy
