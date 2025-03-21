@@ -6,7 +6,7 @@ scrape_configs:
     metrics_path: /esp32/metrics
     scrape_interval: 15s
     static_configs:
-      - targets: ['deskmini:80']
+      - targets: ['apollo:10010']
     metric_relabel_configs:
       - source_labels: [ name ]
         target_label: "type"
