@@ -1,5 +1,5 @@
 ---
-- name: configure dns for authelia
+- name: configure dns for docker registry
   cloudflare_dns:
     api_token: "{{ CLOUDFLARE_API_TOKEN }}"
     zone: coherence.codes
@@ -13,12 +13,12 @@
     - /root/docker-registry
 
 - name: copy docker-compose.yml
-  template: src=docker-compose.yml.j2 dest=/root/docker-registry/docker-compose.yml mode=0644
+  template: src=docker-compose.yaml.j2 dest=/root/docker-registry/docker-compose.yml mode=0644
 
 - name: copy configs
-  template: src={{ item }}.j2 dest=/root/docker-registry/config/{{ item }} mode=0644
+  template: src={{ item }}.j2 dest=/root/docker-registry/{{ item }} mode=0644
   loop:
-    - users_database.yml
+    - config.yaml
   notify: restart service
 
 - name: pull docker image

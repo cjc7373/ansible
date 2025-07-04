@@ -8,3 +8,4 @@
     - { role: trojan, tags: [trojan] }
     - { role: monitoring_exporter, tags: [monitoring_exporter] }
     - { role: monitoring_server, tags: [monitoring_server] }
+    - { role: docker_registry, tags: [docker_registry] }
