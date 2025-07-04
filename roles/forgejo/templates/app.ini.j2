@@ -1,7 +1,7 @@
 APP_NAME = "Coherence's git"
-RUN_USER = gitea
+RUN_USER = forgejo
 RUN_MODE = prod
-WORK_PATH = /var/lib/gitea
+WORK_PATH = /var/lib/forgejo
 
 [server]
 DOMAIN = git.coherence.space
@@ -16,12 +16,12 @@ LFS_JWT_SECRET = {{ LFS_JWT_SECRET }}
 OFFLINE_MODE = false
 
 [database]
-DB_TYPE = sqlite3
-PATH = /var/lib/gitea/gitea.db
-HOST = 
-NAME = 
-USER = 
-PASSWD = 
+DB_TYPE = postgres
+#PATH = /var/lib/gitea/gitea.db
+HOST = localhost:5432
+NAME = forgejo
+USER = {{ POSTGRES_USER }}
+PASSWD = {{ POSTGRES_PASSWORD }}
 SCHEMA = 
 SSL_MODE = disable
 CHARSET = utf8
@@ -49,10 +49,10 @@ SESSION_LIFE_TIME = 8640000
 GC_INTERVAL_TIME = 8640000
 
 [repository]
-ROOT = /var/lib/gitea/data/gitea-repositories
+ROOT = /var/lib/forgejo/data/gitea-repositories
 
 [lfs]
-PATH = /var/lib/gitea/data/lfs
+PATH = /var/lib/forgejo/data/lfs
 
 [mailer]
 ENABLED = false
@@ -64,7 +64,7 @@ ENABLE_OPENID_SIGNUP = false
 [log]
 MODE = console
 LEVEL = info
-ROOT_PATH = /var/lib/gitea/log
+ROOT_PATH = /var/lib/forgejo/log
 logger.router.MODE = console
 
 [repository.pull-request]

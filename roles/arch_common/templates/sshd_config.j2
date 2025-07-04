@@ -119,10 +119,6 @@ Subsystem	sftp	/usr/lib/ssh/sftp-server
 #	ForceCommand cvs server
 
 # FIXME: not tied in one inventory name
-{% if 'beijing' in group_names %}
-AllowUsers root gitea zjb
-{% endif %}
-
 {% if 'shanghai' in group_names %}
-AllowUsers root gitea
+AllowUsers root forgejo
 {% endif %}

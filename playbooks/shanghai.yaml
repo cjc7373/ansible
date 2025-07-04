@@ -19,5 +19,5 @@
       tags: [pa]
     - { role: beian, tags: [beian] }
     - { role: rsshub, tags: [rsshub] }
-    - { role: gitea, tags: [gitea] }
+    - { role: forgejo, tags: [forgejo] }
     - { role: jitsi, tags: [jitsi] }
