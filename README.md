@@ -11,7 +11,7 @@ For some roles, pass a varible `update` with any value to upgrade the service. L
 ## Standard Procedure For A New Machine
 - If the login user is not root, make sure we can login with root.
 - Add this machine to inventory list, which is `./hosts`.
-- Run `ansible-playbook playbooks/install_arch.yml -l host_name -v --ask-pass`
+- Run `ansible-playbook playbooks/install_arch.yml -l [host_name] -v --ask-pass`
 - Input the root password.
 - Double confirm installation when playbook is paused.
 - install iptables-nft (it conflicts with iptables so that it can't be installed automatically)
@@ -80,8 +80,7 @@ Some principles:
 OIDC Endpoints: https://www.authelia.com/integration/openid-connect/introduction/#well-known-discovery-endpoints
 
 ## Backup
-There should be at least two backup servers, for the basic redundancy.
-Or we could use [BorgBase](https://www.borgbase.com/), which provides borg repositories hosting. 10 GB free space seems to be enough.
+Backup is done using kopia.
 
 The backup procedure is done in a fixed interval and do not need human interference.
 

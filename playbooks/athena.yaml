@@ -1,11 +1,10 @@
 ---
-- name: Setup hk
-  hosts: hk
+- name: Setup athena
+  hosts: athena
   roles:
     - { role: arch_common }
     - { role: tailscale, tags: [tailscale] }
     - { role: caddy, tags: [caddy] }
-    - { role: trojan, tags: [trojan] }
     - { role: monitoring_exporter, tags: [monitoring_exporter] }
     - { role: monitoring_server, tags: [monitoring_server] }
     - { role: docker_registry, tags: [docker_registry] }

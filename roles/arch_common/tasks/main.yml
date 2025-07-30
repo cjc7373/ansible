@@ -74,7 +74,7 @@
 
 - name: install some tools
   pacman:
-    name: [htop, neofetch, trash-cli, strace, bind, rsync, speedtest-cli, archlinux-contrib, ncdu, iperf3, lsof, screen, jq, which]
+    name: [htop, screenfetch, trash-cli, strace, bind, rsync, archlinux-contrib, ncdu, iperf3, lsof, screen, jq, which, kopia]
     state: present
 
 - name: create a user for package building

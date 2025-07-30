@@ -64,6 +64,10 @@
   template: src=prometheus-longterm.yml.j2 dest=/etc/prometheus/prometheus-longterm.yml mode=0644
   notify: restart prometheus-longterm
 
+- name: copy prometheus systemd service env
+  template: src=prometheus-env.j2 dest=/etc/conf.d/prometheus mode=0644
+  notify: restart prometheus
+
 - name: copy prometheus config
   template: src=prometheus.yml.j2 dest=/etc/prometheus/prometheus.yml mode=0644
   notify: restart prometheus

@@ -1,9 +1,0 @@
----
-- name: Setup beijing tencent
-  hosts: beijing
-  roles:
-    - { role: arch_common, china_mirror: true }
-    - { role: tailscale, tags: [tailscale] }
-    - frps
-    - { role: caddy, tags: [caddy] }
-    - { role: monitoring_exporter, tags: [monitoring_exporter] }

@@ -9,8 +9,8 @@ User=prometheus
 Group=prometheus
 Restart=on-failure
 WorkingDirectory=/usr/share/prometheus
-EnvironmentFile=-/etc/conf.d/prometheus
-ExecStart=/usr/bin/prometheus --config.file=/etc/prometheus/prometheus-longterm.yml --storage.tsdb.path=/var/lib/prometheus-longterm/data --storage.tsdb.retention.time=100y --web.listen-address="0.0.0.0:9091" $PROMETHEUS_ARGS
+#EnvironmentFile=-/etc/conf.d/prometheus
+ExecStart=/usr/bin/prometheus --config.file=/etc/prometheus/prometheus-longterm.yml --storage.tsdb.path=/var/lib/prometheus-longterm/data --storage.tsdb.retention.time=100y --web.listen-address="127.0.0.1:9091" $PROMETHEUS_ARGS
 ExecReload=/bin/kill -HUP $MAINPID
 LimitNOFILE=65535
 NoNewPrivileges=true
