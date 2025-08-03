@@ -1,0 +1,25 @@
+# server.toml
+### You can generate example configuration by using `tuic-server -i` or `tuic-server --init`
+### ALL settings are OPTIONAL, if you leave one empty, default value will be used
+
+log_level = "info" # Default: info
+
+# The socket address to listen on
+server = "[::]:8443" # Default: "[::]:443"
+
+# User list, contains user UUID and password
+[users] # Default: empty
+{{ uuid }} = "{{ password }}"
+
+[tls]
+# Whether use auto-generated self-signed certificate and key.
+# When enabled, the follwing `certificate` and `private_key` fields will be ignored.
+self_sign = false # Default: false
+
+# The path to the certificate file
+certificate = "/etc/tuic/cert.pem" # Default: ""
+
+# The path to the private key file
+private_key = "/etc/tuic/key.pem" # Default: ""
+
+

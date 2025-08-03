@@ -1,0 +1,25 @@
+- name: create data directory
+  file: path=/root/tuic state=directory mode=0755
+
+- name: copy tuic configs
+  template: src={{ item }}.j2 dest=/root/tuic/{{ item }} mode=0644
+  with_items:
+    - docker-compose.yaml
+    - config.toml
+
+- name: pull and compose up
+  community.docker.docker_compose_v2:
+    project_src: /root/tuic
+    pull: always
+    state: present
+  when: update is defined
+
+- name: compose up
+  community.docker.docker_compose_v2:
+    project_src: /root/tuic
+    state: present
+  when: update is not defined
+
+- name: add caddy config
+  template: src=tuic.caddy.j2 dest=/etc/caddy/conf.d/tuic.caddy mode=0644
+  notify: reload caddy

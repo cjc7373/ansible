@@ -1,4 +1,5 @@
 ---
+# trojan is deprecated, and may be replaced by tuic
 - name: check if trojan-go exists
   command: pacman -Qs trojan-go
   register: result
