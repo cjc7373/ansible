@@ -84,7 +84,61 @@ Backup is done using kopia.
 
 The backup procedure is done in a fixed interval and do not need human interference.
 
-I'm wondering if the restore procedure can be automated, or at least documented..
+Currently, the setup process is done manually. It is as following:
+- `kopia repository connect webdav --url http://apollo:10015/backup/kopia --webdav-username xxx --webdav-password xxx`
+- Enter repo password (stored in keepass)
+- Modify `.config/kopia/repository.config` change `enableActions` to true
+- Refer to https://kopia.io/docs/advanced/actions to set actions
+- `kopia policy set --keep-daily 30 --global` this option should apply to every client (?)
+
+### reference
+prometheus:
+- kopia policy set /var/lib/prometheus-longterm/ --before-folder-action "systemctl stop prometheus-longterm.service"
+- kopia policy set /var/lib/prometheus-longterm/ --after-folder-action "systemctl start prometheus-longterm.service"
+- create systemd service `/etc/systemd/system/prometheus-backup.service`:
+```
+[Unit]
+Description=Backup prometheus-longterm data
+
+[Service]
+Type=oneshot
+Environment="KOPIA_CONFIG_PATH=/root/.config/kopia/repository.config"
+ExecStart=kopia snapshot create /var/lib/prometheus-longterm/
+```
+
+- enable timer: `systemctl enable --now daily@prometheus-backup.timer`
+
+postgresql:
+- kopia policy set /root/postgresql/data/ --before-folder-action "docker compose -f /root/postgresql/docker-compose.yaml stop"
+- kopia policy set /root/postgresql/data/ --after-folder-action "docker compose -f /root/postgresql/docker-compose.yaml start"
+- create systemd service `/etc/systemd/system/postgres-backup.service`:
+```
+[Unit]
+Description=Backup postgres data
+
+[Service]
+Type=oneshot
+Environment="KOPIA_CONFIG_PATH=/root/.config/kopia/repository.config"
+ExecStart=kopia snapshot create /root/postgresql/data/
+```
+
+- enable timer: `systemctl enable --now daily@postgres-backup.timer`
+
+forgejo:
+- kopia policy set /var/lib/forgejo/ --before-folder-action "systemctl stop forgejo.service"
+- kopia policy set /var/lib/forgejo/ --after-folder-action "systemctl start forgejo.service"
+- create systemd service `/etc/systemd/system/forgejo-backup.service`:
+```
+[Unit]
+Description=Backup forgejo data
+
+[Service]
+Type=oneshot
+Environment="KOPIA_CONFIG_PATH=/root/.config/kopia/repository.config"
+ExecStart=kopia snapshot create /var/lib/forgejo/
+```
+
+- enable timer: `systemctl enable --now daily@forgejo-backup.timer`
 
 ### Gunicorn
 `community.general.gunicorn` doesn't seem to support reload. (Because it runs gunicorn as a daemon) So I choose to stick on the systemd service.

@@ -87,6 +87,13 @@
 - name: enable paccache timer
   systemd: name=paccache.timer enabled=yes state=started daemon_reload=yes
 
+- name: Copy timer template config
+  template: src={{ item }}.j2 dest=/etc/systemd/system/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - weekly@.timer
+    - monthly@.timer
+    - daily@.timer
+
 - name: create directory for htmls
   file: path=/var/www state=directory mode=0755 owner=root group=root
 
