@@ -18,6 +18,7 @@
       vars: { zone: coherence.space, domain: analytics }
       tags: [pa]
     - { role: beian, tags: [beian] }
-    - { role: rsshub, tags: [rsshub] }
+    # rsshub is currently not used
+    # - { role: rsshub, tags: [rsshub] }
     - { role: forgejo, tags: [forgejo] }
     - { role: jitsi, tags: [jitsi] }
