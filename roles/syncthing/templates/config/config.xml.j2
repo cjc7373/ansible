@@ -1,9 +1,6 @@
-<configuration version="37">
-    <folder id="onedrive" label="" path="/var/syncthing/onedrive" type="receiveonly" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+<configuration version="51">
+    <folder id="onedrive" label="" path="/var/syncthing/onedrive" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" fsWatcherTimeoutS="0" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
-        <device id="A5EBNHU-AMN63DS-5V57TYC-EXYCX7W-FPTQ6ET-X5TFV7O-DO6WBBY-NKMSRQ2" introducedBy="VWYKAZW-N6FASZJ-RRIVHXO-HZUGXQA-JXBMBNX-WMEXXHP-P5KPX6O-NXIMHAR">
-            <encryptionPassword></encryptionPassword>
-        </device>
         <device id="BQ6TKV6-Y6QCD2U-GW6NLHR-WT7TUME-T2HV36A-XVTBQ2H-MPJ6BKQ-FQ4JGAD" introducedBy="VWYKAZW-N6FASZJ-RRIVHXO-HZUGXQA-JXBMBNX-WMEXXHP-P5KPX6O-NXIMHAR">
             <encryptionPassword></encryptionPassword>
         </device>
@@ -14,6 +11,9 @@
             <encryptionPassword></encryptionPassword>
         </device>
         <device id="T6HBCYP-AM2SXF6-SZQ6UFG-W44LLWR-CCW6TMO-QW4YEJV-GOSRFN5-RFYKZAX" introducedBy="A5EBNHU-AMN63DS-5V57TYC-EXYCX7W-FPTQ6ET-X5TFV7O-DO6WBBY-NKMSRQ2">
+            <encryptionPassword></encryptionPassword>
+        </device>
+        <device id="WT32SKL-VT55DPX-S4SYBV2-SFBVSRV-LIKT7LV-ERK6TXB-FAKFJI2-UAQ5MAV" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <device id="YXZHVZH-WZUVTUE-HOPNKEQ-UT4ILQP-7DNSLYD-MLXTV2A-OHFR5D5-FEZC5QO" introducedBy="A5EBNHU-AMN63DS-5V57TYC-EXYCX7W-FPTQ6ET-X5TFV7O-DO6WBBY-NKMSRQ2">
@@ -33,15 +33,14 @@
         <ignoreDelete>false</ignoreDelete>
         <scanProgressIntervalS>0</scanProgressIntervalS>
         <pullerPauseS>0</pullerPauseS>
+        <pullerDelayS>1</pullerDelayS>
         <maxConflicts>10</maxConflicts>
         <disableSparseFiles>false</disableSparseFiles>
-        <disableTempIndexes>false</disableTempIndexes>
         <paused>false</paused>
-        <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
         <copyOwnershipFromParent>false</copyOwnershipFromParent>
         <modTimeWindowS>0</modTimeWindowS>
-        <maxConcurrentWrites>2</maxConcurrentWrites>
+        <maxConcurrentWrites>16</maxConcurrentWrites>
         <disableFsync>false</disableFsync>
         <blockPullOrder>standard</blockPullOrder>
         <copyRangeMethod>standard</copyRangeMethod>
@@ -56,17 +55,6 @@
             <maxTotalSize>0</maxTotalSize>
         </xattrFilter>
     </folder>
-    <device id="A5EBNHU-AMN63DS-5V57TYC-EXYCX7W-FPTQ6ET-X5TFV7O-DO6WBBY-NKMSRQ2" name="ONEPLUS-KB2000" compression="metadata" introducer="true" skipIntroductionRemovals="false" introducedBy="VWYKAZW-N6FASZJ-RRIVHXO-HZUGXQA-JXBMBNX-WMEXXHP-P5KPX6O-NXIMHAR">
-        <address>dynamic</address>
-        <paused>false</paused>
-        <autoAcceptFolders>false</autoAcceptFolders>
-        <maxSendKbps>0</maxSendKbps>
-        <maxRecvKbps>0</maxRecvKbps>
-        <maxRequestKiB>0</maxRequestKiB>
-        <untrusted>false</untrusted>
-        <remoteGUIPort>0</remoteGUIPort>
-        <numConnections>0</numConnections>
-    </device>
     <device id="BQ6TKV6-Y6QCD2U-GW6NLHR-WT7TUME-T2HV36A-XVTBQ2H-MPJ6BKQ-FQ4JGAD" name="coherence-deskmini" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="VWYKAZW-N6FASZJ-RRIVHXO-HZUGXQA-JXBMBNX-WMEXXHP-P5KPX6O-NXIMHAR">
         <address>dynamic</address>
         <paused>false</paused>
@@ -111,6 +99,17 @@
         <remoteGUIPort>0</remoteGUIPort>
         <numConnections>0</numConnections>
     </device>
+    <device id="WT32SKL-VT55DPX-S4SYBV2-SFBVSRV-LIKT7LV-ERK6TXB-FAKFJI2-UAQ5MAV" name="kebab" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
+        <address>dynamic</address>
+        <paused>false</paused>
+        <autoAcceptFolders>false</autoAcceptFolders>
+        <maxSendKbps>0</maxSendKbps>
+        <maxRecvKbps>0</maxRecvKbps>
+        <maxRequestKiB>0</maxRequestKiB>
+        <untrusted>false</untrusted>
+        <remoteGUIPort>0</remoteGUIPort>
+        <numConnections>0</numConnections>
+    </device>
     <device id="YXZHVZH-WZUVTUE-HOPNKEQ-UT4ILQP-7DNSLYD-MLXTV2A-OHFR5D5-FEZC5QO" name="coherence-macbook.local" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="A5EBNHU-AMN63DS-5V57TYC-EXYCX7W-FPTQ6ET-X5TFV7O-DO6WBBY-NKMSRQ2">
         <address>dynamic</address>
         <paused>false</paused>
@@ -122,8 +121,9 @@
         <remoteGUIPort>0</remoteGUIPort>
         <numConnections>0</numConnections>
     </device>
-    <gui enabled="true" tls="false" debugging="false" sendBasicAuthPrompt="false">
+    <gui enabled="true" tls="false" sendBasicAuthPrompt="false">
         <address>127.0.0.1:8384</address>
+        <metricsWithoutAuth>false</metricsWithoutAuth>
         <apikey>J6Xo9DjAa22bx5j7P5srbHynDEyDo9ir</apikey>
         <theme>default</theme>
     </gui>
@@ -169,13 +169,13 @@
         <stunKeepaliveStartS>180</stunKeepaliveStartS>
         <stunKeepaliveMinS>20</stunKeepaliveMinS>
         <stunServer>default</stunServer>
-        <databaseTuning>auto</databaseTuning>
         <maxConcurrentIncomingRequestKiB>0</maxConcurrentIncomingRequestKiB>
         <announceLANAddresses>true</announceLANAddresses>
         <sendFullIndexOnUpgrade>false</sendFullIndexOnUpgrade>
+        <auditEnabled>false</auditEnabled>
+        <auditFile></auditFile>
         <connectionLimitEnough>0</connectionLimitEnough>
         <connectionLimitMax>0</connectionLimitMax>
-        <insecureAllowOldTLSVersions>false</insecureAllowOldTLSVersions>
         <connectionPriorityTcpLan>10</connectionPriorityTcpLan>
         <connectionPriorityQuicLan>20</connectionPriorityQuicLan>
         <connectionPriorityTcpWan>30</connectionPriorityTcpWan>
@@ -184,7 +184,7 @@
         <connectionPriorityUpgradeThreshold>0</connectionPriorityUpgradeThreshold>
     </options>
     <defaults>
-        <folder id="" label="" path="~" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+        <folder id="" label="" path="~" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" fsWatcherTimeoutS="0" ignorePerms="false" autoNormalize="true">
             <filesystemType>basic</filesystemType>
             <device id="S37NE43-64TIMVR-FEE2X5Q-FPVNMBO-HRW7S22-VXW5KIY-67FLKE3-YLXS5QT" introducedBy="">
                 <encryptionPassword></encryptionPassword>
@@ -202,15 +202,14 @@
             <ignoreDelete>false</ignoreDelete>
             <scanProgressIntervalS>0</scanProgressIntervalS>
             <pullerPauseS>0</pullerPauseS>
+            <pullerDelayS>1</pullerDelayS>
             <maxConflicts>10</maxConflicts>
             <disableSparseFiles>false</disableSparseFiles>
-            <disableTempIndexes>false</disableTempIndexes>
             <paused>false</paused>
-            <weakHashThresholdPct>25</weakHashThresholdPct>
             <markerName>.stfolder</markerName>
             <copyOwnershipFromParent>false</copyOwnershipFromParent>
             <modTimeWindowS>0</modTimeWindowS>
-            <maxConcurrentWrites>2</maxConcurrentWrites>
+            <maxConcurrentWrites>16</maxConcurrentWrites>
             <disableFsync>false</disableFsync>
             <blockPullOrder>standard</blockPullOrder>
             <copyRangeMethod>standard</copyRangeMethod>
