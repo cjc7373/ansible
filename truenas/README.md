@@ -1,4 +1,4 @@
-Non-ansible provisioned. Related to my truenas configuration.
+Non-ansible provisioned. Related to my truenas server (named apollo) configuration.
 
 ## immich
 To expose immich to athena, add a caddy file to `/etc/caddy/conf.d/`:

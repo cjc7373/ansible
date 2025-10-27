@@ -1,5 +1,5 @@
 fava.coherence.space {
-    reverse_proxy 127.0.0.1:6674
+    reverse_proxy apollo:30074
     {# FIXME: upstream can't be a https site, see: https://git.coherence.space/cjc7373/issue_tracker/issues/107 #}
     forward_auth 127.0.0.1:8045 {
 		uri /api/authz/forward-auth

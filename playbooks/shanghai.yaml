@@ -11,7 +11,7 @@
     - { role: joplin_server, tags: [joplin_server] }
     - { role: miniflux, tags: [miniflux] }
     - { role: authelia, tags: [authelia] }
-    - { role: syncthing, tags: [syncthing] }
+    # - { role: syncthing, tags: [syncthing] }
     - { role: fava, tags: [fava] }
     - { role: dpb, tags: [dpb] }
     - role: plausible_analytics

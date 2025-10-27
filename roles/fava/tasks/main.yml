@@ -7,30 +7,31 @@
     record: fava
     value: "{{ inventory_hostname }}"
 
-- name: create fava directory
-  file: path={{ item }} state=directory mode=0755
-  loop:
-    - /root/fava
+# deprecated: not used any more
+# - name: create fava directory
+#   file: path={{ item }} state=directory mode=0755
+#   loop:
+#     - /root/fava
 
-- name: copy fava configs
-  template: src={{ item }}.j2 dest=/root/fava/{{ item }} mode=0644
-  loop:
-    - docker-compose.yml
+# - name: copy fava configs
+#   template: src={{ item }}.j2 dest=/root/fava/{{ item }} mode=0644
+#   loop:
+#     - docker-compose.yml
 
-- name: pull docker image
-  command:
-    chdir: /root/fava
-    cmd: docker compose pull
-  when: update is defined
-  register: result
-  changed_when: '"Pulling fs layer" in result.stderr'
+# - name: pull docker image
+#   command:
+#     chdir: /root/fava
+#     cmd: docker compose pull
+#   when: update is defined
+#   register: result
+#   changed_when: '"Pulling fs layer" in result.stderr'
 
-- name: create and start service
-  command:
-    chdir: /root/fava
-    cmd: docker compose up -d
-  register: result
-  changed_when: '"Starting" in result.stderr'
+# - name: create and start service
+#   command:
+#     chdir: /root/fava
+#     cmd: docker compose up -d
+#   register: result
+#   changed_when: '"Starting" in result.stderr'
 
 - name: add caddy config
   template: src=fava.caddy.j2 dest=/etc/caddy/conf.d/fava.caddy mode=0644
