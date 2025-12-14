@@ -26,7 +26,7 @@ services:
       - CLEANUP_REMOVE_SESSIONS_DAYS=365
       # disable cleanup (since the total amount of entries is relatively small)
       - CLEANUP_ARCHIVE_UNREAD_DAYS=-1
-      - CLEANUP_ARCHIVE_READ_DAYS=-1
+      - CLEANUP_ARCHIVE_READ_DAYS=1000
 networks:
   database:
     external: true

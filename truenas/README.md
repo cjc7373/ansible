@@ -14,3 +14,6 @@ photos.coherence.space {
 ```
 
 Then reload caddy service.
+
+## Other scripts used
+- zfs-prune-snapshots
