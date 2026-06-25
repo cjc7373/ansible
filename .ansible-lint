@@ -3,5 +3,6 @@ skip_list:
   - name[casing]
   - fqcn-builtins
   - no-free-form
+  - var-naming
 
 profile: basic

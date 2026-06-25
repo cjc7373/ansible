@@ -10,6 +10,7 @@ services:
             - APP_PORT=22300
             - APP_BASE_URL=https://joplin.coherence.space
             - MAX_TIME_DRIFT=0 # disable time check because system time already synced with ntp 
+            - EVENTS_AUTO_DELETE_ENABLED=true
             - DB_CLIENT=pg
             - POSTGRES_PASSWORD={{POSTGRES_PASSWORD}}
             - POSTGRES_DATABASE=joplin
