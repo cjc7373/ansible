@@ -22,3 +22,4 @@
     # - { role: rsshub, tags: [rsshub] }
     - { role: forgejo, tags: [forgejo] }
     - { role: jitsi, tags: [jitsi] }
+    - { role: monitoring_server, tags: [monitoring_server] }
