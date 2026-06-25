@@ -25,7 +25,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 1,
-    "id": 1,
+    "id": 3,
     "links": [
         {
             "icon": "external link",
@@ -78,8 +78,7 @@
                         "mode": "percentage",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "dark-yellow",
@@ -127,7 +126,7 @@
                 "text": {},
                 "valueMode": "color"
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -212,8 +211,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "rgba(50, 172, 45, 0.97)",
-                                "value": null
+                                "color": "rgba(50, 172, 45, 0.97)"
                             },
                             {
                                 "color": "rgba(237, 129, 40, 0.89)",
@@ -251,7 +249,7 @@
                 "showThresholdMarkers": true,
                 "sizing": "auto"
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -302,8 +300,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "rgba(50, 172, 45, 0.97)",
-                                "value": null
+                                "color": "rgba(50, 172, 45, 0.97)"
                             },
                             {
                                 "color": "rgba(237, 129, 40, 0.89)",
@@ -341,7 +338,7 @@
                 "showThresholdMarkers": true,
                 "sizing": "auto"
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -382,8 +379,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "rgba(50, 172, 45, 0.97)",
-                                "value": null
+                                "color": "rgba(50, 172, 45, 0.97)"
                             },
                             {
                                 "color": "rgba(237, 129, 40, 0.89)",
@@ -421,7 +417,7 @@
                 "showThresholdMarkers": true,
                 "sizing": "auto"
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -488,8 +484,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "rgba(50, 172, 45, 0.97)",
-                                "value": null
+                                "color": "rgba(50, 172, 45, 0.97)"
                             },
                             {
                                 "color": "rgba(237, 129, 40, 0.89)",
@@ -527,7 +522,7 @@
                 "showThresholdMarkers": true,
                 "sizing": "auto"
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -576,8 +571,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "rgba(50, 172, 45, 0.97)",
-                                "value": null
+                                "color": "rgba(50, 172, 45, 0.97)"
                             },
                             {
                                 "color": "rgba(237, 129, 40, 0.89)",
@@ -615,7 +609,7 @@
                 "showThresholdMarkers": true,
                 "sizing": "auto"
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -662,8 +656,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -700,7 +693,7 @@
                 "textMode": "auto",
                 "wideLayout": true
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -746,8 +739,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -784,7 +776,7 @@
                 "textMode": "auto",
                 "wideLayout": true
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -831,8 +823,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "rgba(50, 172, 45, 0.97)",
-                                "value": null
+                                "color": "rgba(50, 172, 45, 0.97)"
                             },
                             {
                                 "color": "rgba(237, 129, 40, 0.89)",
@@ -873,7 +864,7 @@
                 "textMode": "auto",
                 "wideLayout": true
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -922,8 +913,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -960,7 +950,7 @@
                 "textMode": "auto",
                 "wideLayout": true
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -1007,8 +997,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -1045,7 +1034,7 @@
                 "textMode": "auto",
                 "wideLayout": true
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -1129,8 +1118,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -1264,11 +1252,12 @@
                     "width": 250
                 },
                 "tooltip": {
+                    "hideZeros": false,
                     "mode": "multi",
                     "sort": "desc"
                 }
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -1413,8 +1402,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -1810,11 +1798,12 @@
                     "width": 350
                 },
                 "tooltip": {
+                    "hideZeros": false,
                     "mode": "multi",
                     "sort": "none"
                 }
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -1932,8 +1921,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -2318,11 +2306,12 @@
                     "showLegend": true
                 },
                 "tooltip": {
+                    "hideZeros": false,
                     "mode": "multi",
                     "sort": "none"
                 }
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -2404,8 +2393,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -2432,11 +2420,12 @@
                     "showLegend": true
                 },
                 "tooltip": {
+                    "hideZeros": false,
                     "mode": "multi",
                     "sort": "none"
                 }
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -23425,7 +23414,7 @@
     ],
     "preload": false,
     "refresh": "1m",
-    "schemaVersion": 40,
+    "schemaVersion": 41,
     "tags": [
         "linux"
     ],
@@ -23470,8 +23459,8 @@
             },
             {
                 "current": {
-                    "text": "beijing:9100",
-                    "value": "beijing:9100"
+                    "text": "athena:9100",
+                    "value": "athena:9100"
                 },
                 "datasource": {
                     "type": "prometheus",
@@ -23519,6 +23508,5 @@
     "timezone": "browser",
     "title": "Node Exporter Full",
     "uid": "rYdddlPWk",
-    "version": 1,
-    "weekStart": ""
+    "version": 1
 }

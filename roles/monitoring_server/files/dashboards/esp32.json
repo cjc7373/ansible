@@ -18,7 +18,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 4,
+    "id": 2,
     "links": [],
     "panels": [
         {
@@ -69,8 +69,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -97,11 +96,12 @@
                     "showLegend": true
                 },
                 "tooltip": {
+                    "hideZeros": false,
                     "mode": "single",
                     "sort": "none"
                 }
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -167,8 +167,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -195,11 +194,12 @@
                     "showLegend": true
                 },
                 "tooltip": {
+                    "hideZeros": false,
                     "mode": "single",
                     "sort": "none"
                 }
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -265,8 +265,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -293,11 +292,12 @@
                     "showLegend": true
                 },
                 "tooltip": {
+                    "hideZeros": false,
                     "mode": "single",
                     "sort": "none"
                 }
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -363,8 +363,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -404,11 +403,12 @@
                     "showLegend": true
                 },
                 "tooltip": {
+                    "hideZeros": false,
                     "mode": "single",
                     "sort": "none"
                 }
             },
-            "pluginVersion": "11.3.0-pre",
+            "pluginVersion": "11.6.1",
             "targets": [
                 {
                     "datasource": {
@@ -441,7 +441,7 @@
         }
     ],
     "preload": false,
-    "schemaVersion": 40,
+    "schemaVersion": 41,
     "tags": [],
     "templating": {
         "list": []
@@ -454,6 +454,5 @@
     "timezone": "browser",
     "title": "esp32",
     "uid": "fe76zw2810flse",
-    "version": 5,
-    "weekStart": ""
+    "version": 1
 }
