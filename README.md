@@ -36,16 +36,12 @@ Saving password using `keyring set ansible default` (which is provided by python
 - View an encrypted variable: `ansible localhost -m debug -a var="new_user_password" -e "@foo.yml"` (`@` is necessary)
 
 ## TODO
-- backup (maybe borg?)
 - make use of the until loop.. The `pacman -Sy` seems to be flaky
 - use `debug` mode to print messages during execution
-- Could cloudflare be automated? - Sure it can! Use `community.general.cloudflare_dns`.
 - For now, the configs management is divided to two parts, my own pc and my VPS. However, I believe they can be merged into one..
 - Find some motd scripts, like: https://github.com/yboetz/motd/blob/master/50-fail2ban-status
 - Upgrade strategy. For now upgrade is executed manually with `pacman -Syu` and `reboot`.
   Should the system be upgraded every time a playbook runs? Or upgraged only when a specific variable is defined?
-- configure docker image mirror
-- fix ansible-lint errors
 
 ## Issues
 - docker-compose module requires docker-compose < 2.0.0, because of a major [rewrite](https://github.com/ansible-collections/community.docker/issues/216).

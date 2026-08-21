@@ -68,6 +68,7 @@
       - sysstat # provides iostat
       - man-db
       - man-pages
+      - kitty-terminfo # kitty's terminfo is not included in ncurses
     state: present
 
 - name: install some tools

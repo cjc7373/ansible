@@ -1,0 +1,18 @@
+FROM python:3.14-slim
+
+RUN pip install --no-cache-dir fava
+
+RUN apt update \
+    && apt install -y --no-install-recommends git \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install git+https://github.com/cjc7373/fava-investment.git@746e712bf69f27e73cddff334b1f8930484d50f6
+
+# Default fava port number
+EXPOSE 5000
+
+ENV BEANCOUNT_FILE=""
+ENV FAVA_HOST="0.0.0.0"
+
+ENTRYPOINT ["fava"]
+
