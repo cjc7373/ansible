@@ -60,7 +60,7 @@ In my humble opinion, the easiest way is to copy the config (including private k
 ### Tailscale
 Tailscale's NAT traversal techniques work with most firewalls out of the box. I've tested with firewalld and it works as expected. So there is no need to allow some ports manually in firewalld.
 
-Tailscale's auth key expires every 90 days. We need to manually update it.
+Tailscale's auth key expires every 90 days. We need to manually update it (tailscale_authkey).
 
 ### Firewalld
 It may block docker interfaces.. Docker has support for auto-config firewalld, but this require firewalld running and loading configs before creating containers.

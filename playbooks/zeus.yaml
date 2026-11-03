@@ -1,0 +1,6 @@
+- name: Setup zeus
+  hosts: zeus
+  roles:
+    - { role: arch_common, china_mirror: true }
+    - { role: tailscale, tags: [tailscale] }
+    - { role: caddy, tags: [caddy] }

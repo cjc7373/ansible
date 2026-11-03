@@ -1,11 +1,11 @@
 [lo]
 localhost 
 
-[hk]
-hk.coherence.codes ansible_user=root
-
 [shanghai]
 shanghai.coherence.codes ansible_user=root
 
 [athena]
 athena.coherence.codes ansible_user=root
+
+[zeus]
+zeus.coherence.codes ansible_user=root
