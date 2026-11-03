@@ -107,6 +107,9 @@
   template: src=pip.conf.j2 dest=/etc/pip.conf owner=root group=root mode=0644
   when: china_mirror
 
+- name: install htop conf
+  template: src=htoprc.j2 dest=/root/.config/htop/htoprc owner=root group=root mode=0644
+
 - name: configure sshd
   template: src=sshd_config.j2 dest=/etc/ssh/sshd_config owner=root group=root mode=0644 validate='/usr/sbin/sshd -t -f %s'
   notify:
