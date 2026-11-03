@@ -16,7 +16,7 @@
 # GNU General Public License at <http://www.gnu.org/licenses/> for
 # more details.
 
-set -e
+set -ex
 
 # Gathering informations about actual environment.
 if command -v wget >/dev/null 2>&1; then
@@ -101,11 +101,11 @@ configure_chroot() {
 	if ! is_openvz && ! pidof haveged >/dev/null; then
 		# Disable signature check, install and launch haveged and re-enable signature checks.
 		sed -i.bak "s/^[[:space:]]*SigLevel[[:space:]]*=.*$/SigLevel = Never/" "/root.$cpu_type/etc/pacman.conf"
-		chroot_exec 'pacman --needed --noconfirm -Sy haveged && haveged'
+		chroot_exec 'pacman --needed --noconfirm --disable-sandbox-filesystem -Sy haveged && haveged'
 		mv "/root.$cpu_type/etc/pacman.conf.bak" "/root.$cpu_type/etc/pacman.conf"
 	fi
 	chroot_exec 'pacman-key --init && pacman-key --populate archlinux'
-	chroot_exec 'pacman --needed --noconfirm -Sy archlinux-keyring'
+	chroot_exec 'pacman --needed --noconfirm --disable-sandbox-filesystem -Sy archlinux-keyring'
 	# Generate fstab
 	chroot_exec 'genfstab /mnt >> /etc/fstab'
 
